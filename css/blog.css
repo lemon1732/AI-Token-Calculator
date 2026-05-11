@@ -278,6 +278,25 @@
   font-family: 'SF Mono', 'Fira Code', monospace;
 }
 
+.article-body pre {
+  background: var(--brown-dark);
+  color: #e8d5c8;
+  padding: 1.25rem 1.5rem;
+  border-radius: 0.75rem;
+  overflow-x: auto;
+  margin: 1.5rem 0;
+  font-size: 0.85rem;
+  line-height: 1.7;
+}
+
+.article-body pre code {
+  background: none;
+  color: inherit;
+  padding: 0;
+  border-radius: 0;
+  font-size: inherit;
+}
+
 /* ── Table (in article) ── */
 .article-body table {
   width: 100%;

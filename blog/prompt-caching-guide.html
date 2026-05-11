@@ -17,12 +17,23 @@
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "Article",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://tokencostcalc.com" },
+      { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://tokencostcalc.com/blog.html" },
+      { "@type": "ListItem", "position": 3, "name": "Prompt Caching Guide" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
     "headline": "How to Save 90% on AI API Costs with Prompt Caching",
     "description": "Prompt caching can reduce your AI API input costs by up to 90%. Learn how it works with real pricing examples and code patterns.",
     "datePublished": "2026-05-03",
     "dateModified": "2026-05-03",
-    "author": { "@type": "Organization", "name": "AI Token Cost Calculator", "url": "https://tokencostcalc.com" },
+    "author": { "@type": "Person", "name": "zhu", "url": "https://tokencostcalc.com/about.html" },
     "publisher": { "@type": "Organization", "name": "AI Token Cost Calculator", "url": "https://tokencostcalc.com" },
     "mainEntityOfPage": "https://tokencostcalc.com/blog/prompt-caching-guide.html"
   }
@@ -55,7 +66,7 @@
           <span class="article-date">May 3, 2026</span>
           <span class="article-tag">Guide</span>
         </div>
-        <div class="article-author">By <strong>AI Token Cost Calculator</strong></div>
+        <div class="article-author">By <strong>zhu</strong></div>
       </header>
 
       <div class="article-body">
@@ -274,7 +285,7 @@
 
         <h2>The Bottom Line</h2>
 
-        <p>Prompt caching is the single most impactful cost optimization available to AI API users. It requires zero code changes on most providers, and the savings compound with every request. If your application sends the same system prompt more than three times, you're leaving money on the table. For the models with the best cache pricing, see our <a href="/blog/cheapest-ai-api-models-2026.html">5 Cheapest AI API Models</a> guide.</p>
+        <p>Prompt caching is the single most impactful cost optimization available to AI API users. It requires zero code changes on most providers, and the savings compound with every request. If your application sends the same system prompt more than three times, you're leaving money on the table. For the models with the best cache pricing, see our <a href="/blog/openai-vs-anthropic-vs-google-pricing-2026.html">complete pricing comparison</a>.</p>
 
         <p>Start by measuring your current costs. Then structure your prompts with stable content first, variable content last. The savings will follow.</p>
 

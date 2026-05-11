@@ -17,12 +17,23 @@
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "Article",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://tokencostcalc.com" },
+      { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://tokencostcalc.com/blog.html" },
+      { "@type": "ListItem", "position": 3, "name": "What Are Tokens? Guide" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
     "headline": "What Are Tokens? A Complete Guide to AI API Pricing",
     "description": "Learn what tokens are, how AI providers count them differently, and how to estimate your API costs.",
     "datePublished": "2026-04-29",
     "dateModified": "2026-04-29",
-    "author": { "@type": "Organization", "name": "AI Token Cost Calculator", "url": "https://tokencostcalc.com" },
+    "author": { "@type": "Person", "name": "zhu", "url": "https://tokencostcalc.com/about.html" },
     "publisher": { "@type": "Organization", "name": "AI Token Cost Calculator", "url": "https://tokencostcalc.com" },
     "mainEntityOfPage": "https://tokencostcalc.com/blog/token-pricing-guide.html"
   }
@@ -55,7 +66,7 @@
           <span class="article-date">April 29, 2026</span>
           <span class="article-tag">Guide</span>
         </div>
-        <div class="article-author">By <strong>AI Token Cost Calculator</strong></div>
+        <div class="article-author">By <strong>zhu</strong></div>
       </header>
 
       <div class="article-body">
@@ -66,7 +77,7 @@
 
         <p>A <strong>token</strong> is the smallest unit of text that an AI model processes. Before your text reaches the model, it passes through a <strong>tokenizer</strong> — a program that splits your input into chunks. These chunks can be whole words, parts of words, punctuation marks, or even spaces.</p>
 
-        <p>For example, the sentence <code>Hello, how are you?</code> might be split into five tokens: <code>Hello</code> <code>,</code> <code> how</code> <code> are</code> <code> you</code> <code>?</code>. Notice that the space before "how" is part of the token — tokenizers treat spaces as meaningful characters.</p>
+        <p>For example, the sentence <code>Hello, how are you?</code> might be split into six tokens: <code>Hello</code> <code>,</code> <code> how</code> <code> are</code> <code> you</code> <code>?</code>. Notice that the space before "how" is part of the token — tokenizers treat spaces as meaningful characters.</p>
 
         <blockquote>
           <p>A token is roughly 4 characters in English, or about ¾ of a word. But this is just an approximation — the actual count depends on the specific text and the tokenizer used.</p>
