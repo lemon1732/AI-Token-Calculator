@@ -2,43 +2,40 @@ const TokenCounter = (() => {
   let encoder = null;
   let loading = false;
   let loaded = false;
+  let failed = false;
 
-  // Model to tiktoken encoding mapping
-  const ENCODING_MAP = {
-    "gpt-5.5": "o200k_base",
-    "gpt-5.5-pro": "o200k_base",
-    "gpt-5.4": "o200k_base",
-    "gpt-5.4-mini": "o200k_base",
-    "gpt-5.4-nano": "o200k_base",
-    "gpt-5.4-pro": "o200k_base",
-  };
+  const OPENAI_IDS = new Set([
+    "gpt-5.5", "gpt-5.5-pro",
+    "gpt-5.4", "gpt-5.4-mini", "gpt-5.4-nano", "gpt-5.4-pro",
+  ]);
 
-  const OPENAI_IDS = new Set(Object.keys(ENCODING_MAP));
+  function withTimeout(promise, ms) {
+    return Promise.race([
+      promise,
+      new Promise((_, reject) => setTimeout(() => reject(new Error("Timeout")), ms)),
+    ]);
+  }
 
   async function loadTokenizer() {
-    if (loaded || loading) return;
+    if (loaded || loading || failed) return;
     loading = true;
     const loadingEl = document.getElementById("tc-loading");
     if (loadingEl) loadingEl.hidden = false;
 
     try {
-      // Load tiktoken from CDN (ES module)
-      const tiktokenModule = await import(
-        "https://cdn.jsdelivr.net/npm/tiktoken@1.0.20/+esm"
+      const { getEncoding } = await withTimeout(
+        import("https://cdn.jsdelivr.net/npm/js-tiktoken@1.0.21/+esm"),
+        15000
       );
-      // Get the encoder for o200k_base (used by all current OpenAI models)
-      encoder = tiktokenModule.encoding_for_model("gpt-4o");
+      encoder = getEncoding("o200k_base");
       loaded = true;
     } catch (e) {
-      console.error("Failed to load tiktoken:", e);
+      console.error("Failed to load tokenizer:", e);
+      failed = true;
     } finally {
       loading = false;
       if (loadingEl) loadingEl.hidden = true;
     }
-  }
-
-  function isOpenAI(modelId) {
-    return OPENAI_IDS.has(modelId);
   }
 
   function countTokens(text, modelId) {
@@ -46,13 +43,12 @@ const TokenCounter = (() => {
 
     const chars = text.length;
     if (!encoder) {
-      // Fallback estimation if tiktoken not loaded
       return { tokens: Math.ceil(chars / 4), chars, isEstimate: true };
     }
 
     try {
       const encoded = encoder.encode(text);
-      const isOpenAi = isOpenAI(modelId);
+      const isOpenAi = OPENAI_IDS.has(modelId);
       return {
         tokens: encoded.length,
         chars,
@@ -63,5 +59,5 @@ const TokenCounter = (() => {
     }
   }
 
-  return { loadTokenizer, countTokens, isOpenAI };
+  return { loadTokenizer, countTokens };
 })();
