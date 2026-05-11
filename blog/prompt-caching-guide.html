@@ -80,74 +80,17 @@
           <li><strong>Cache read</strong> — Every subsequent call that hits the cache pays a dramatically reduced rate. This is where the 90% savings come from.</li>
         </ul>
 
-        <h2>Caching Pricing Across Providers</h2>
+        <h2>Caching Savings Across Providers</h2>
 
-        <p>Here's what each major provider charges for cached tokens (per million tokens):</p>
+        <p>Every major provider offers prompt caching, but the savings and pricing models differ:</p>
 
-        <table>
-          <thead>
-            <tr>
-              <th>Provider</th>
-              <th>Normal Input</th>
-              <th>Cache Write</th>
-              <th>Cache Read</th>
-              <th>Savings</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><strong>Anthropic</strong> (Opus 4.7)</td>
-              <td>$5.00</td>
-              <td>$6.25</td>
-              <td>$0.50</td>
-              <td>90%</td>
-            </tr>
-            <tr>
-              <td><strong>Anthropic</strong> (Sonnet 4.6)</td>
-              <td>$3.00</td>
-              <td>$3.75</td>
-              <td>$0.30</td>
-              <td>90%</td>
-            </tr>
-            <tr>
-              <td><strong>OpenAI</strong> (GPT-5.5)</td>
-              <td>$5.00</td>
-              <td>$5.00</td>
-              <td>$0.50</td>
-              <td>90%</td>
-            </tr>
-            <tr>
-              <td><strong>OpenAI</strong> (GPT-5.4)</td>
-              <td>$2.50</td>
-              <td>$2.50</td>
-              <td>$0.25</td>
-              <td>90%</td>
-            </tr>
-            <tr>
-              <td><strong>DeepSeek</strong> (V4 Flash)</td>
-              <td>$0.14</td>
-              <td>$0.14</td>
-              <td>$0.0028</td>
-              <td>98%</td>
-            </tr>
-            <tr>
-              <td><strong>DeepSeek</strong> (V4 Pro*)</td>
-              <td>$0.435</td>
-              <td>$0.435</td>
-              <td>$0.0036</td>
-              <td>99%</td>
-            </tr>
-          </tbody>
-        </table>
+        <ul>
+          <li><strong>OpenAI & Google:</strong> ~90% savings on cached tokens. No premium on cache writes — you pay the same as normal input the first time.</li>
+          <li><strong>Anthropic:</strong> ~90% savings on cache reads, but charges a 25% premium on cache writes. Caching only pays off if you send the same prefix 3+ times.</li>
+          <li><strong>DeepSeek:</strong> 98-99% savings on cache reads — the most aggressive in the industry. At $0.0028/M, cached tokens are essentially free.</li>
+        </ul>
 
-        <p style="font-size: 0.78rem; color: var(--mocha-light);">* DeepSeek V4 Pro: 75% off until May 31, 2026. DeepSeek cache read pricing is 1/10 of the launch price as of April 26, 2026.</p>
-
-        <div class="info-box">
-          <div class="info-box-title">Key Differences</div>
-          <p><strong>Anthropic</strong> charges a 25% premium on cache writes — you pay $6.25 instead of $5.00 the first time. But subsequent reads are 90% cheaper.</p>
-          <p><strong>OpenAI</strong> charges the same price for cache writes as normal input — no premium, no penalty.</p>
-          <p><strong>DeepSeek</strong> offers the most aggressive discount: cache reads are 98-99% cheaper than normal input. At $0.0028/M, cached tokens are essentially free.</p>
-        </div>
+        <p>For detailed cache pricing per model, see our <a href="/blog/openai-vs-anthropic-vs-google-pricing-2026.html">Complete API Pricing Comparison</a>.</p>
 
         <h2>How Much Can You Save? A Real Example</h2>
 
@@ -330,7 +273,7 @@
 
         <h2>The Bottom Line</h2>
 
-        <p>Prompt caching is the single most impactful cost optimization available to AI API users. It requires zero code changes on most providers, and the savings compound with every request. If your application sends the same system prompt more than three times, you're leaving money on the table.</p>
+        <p>Prompt caching is the single most impactful cost optimization available to AI API users. It requires zero code changes on most providers, and the savings compound with every request. If your application sends the same system prompt more than three times, you're leaving money on the table. For the models with the best cache pricing, see our <a href="/blog/cheapest-ai-api-models-2026.html">5 Cheapest AI API Models</a> guide.</p>
 
         <p>Start by measuring your current costs. Then structure your prompts with stable content first, variable content last. The savings will follow.</p>
 

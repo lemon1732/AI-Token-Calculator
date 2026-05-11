@@ -132,66 +132,11 @@
         <h3>Cache Read Tokens</h3>
         <p>If you send the same prefix (like a system prompt) repeatedly, providers can cache it. Cached tokens are dramatically cheaper — typically <strong>90% less</strong> than regular input tokens. This is one of the most effective ways to reduce costs for applications with repetitive prompts.</p>
 
-        <h2>Real-World Pricing Comparison (May 2026)</h2>
+        <h2>Real-World Pricing (May 2026)</h2>
 
-        <p>Here's what the major providers actually charge, per million tokens:</p>
+        <p>Prices vary dramatically across providers. The cheapest model (Gemini 2.5 Flash-Lite at $0.10/M input) is <strong>50x cheaper</strong> than the most expensive (GPT-5.5 at $5.00). Output tokens are always more expensive than input — typically 3-6x more — because the model generates them one at a time.</p>
 
-        <table>
-          <thead>
-            <tr>
-              <th>Model</th>
-              <th>Input</th>
-              <th>Output</th>
-              <th>Cache Read</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><strong>GPT-5.5</strong></td>
-              <td>$5.00</td>
-              <td>$30.00</td>
-              <td>$0.50</td>
-            </tr>
-            <tr>
-              <td><strong>GPT-5.4</strong></td>
-              <td>$2.50</td>
-              <td>$15.00</td>
-              <td>$0.25</td>
-            </tr>
-            <tr>
-              <td><strong>Claude Opus 4.7</strong></td>
-              <td>$5.00</td>
-              <td>$25.00</td>
-              <td>$0.50</td>
-            </tr>
-            <tr>
-              <td><strong>Claude Sonnet 4.6</strong></td>
-              <td>$3.00</td>
-              <td>$15.00</td>
-              <td>$0.30</td>
-            </tr>
-            <tr>
-              <td><strong>Gemini 3.1 Pro</strong></td>
-              <td>$2.00</td>
-              <td>$12.00</td>
-              <td>$0.50</td>
-            </tr>
-            <tr>
-              <td><strong>DeepSeek V4 Pro*</strong></td>
-              <td>$0.435</td>
-              <td>$0.87</td>
-              <td>$0.0036</td>
-            </tr>
-            <tr>
-              <td><strong>DeepSeek V4 Flash</strong></td>
-              <td>$0.14</td>
-              <td>$0.28</td>
-              <td>$0.0028</td>
-            </tr>
-          </tbody>
-        </table>
-
-        <p style="font-size: 0.78rem; color: var(--mocha-light);">* DeepSeek V4 Pro: 75% off until May 31, 2026. Original price: $1.74 input, $3.48 output.</p>
+        <p>For a complete, side-by-side comparison of all 20+ models across OpenAI, Anthropic, Google, and DeepSeek, see our <a href="/blog/openai-vs-anthropic-vs-google-pricing-2026.html">Complete API Pricing Comparison</a>.</p>
 
         <h2>How to Estimate Your Costs</h2>
 
