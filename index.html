@@ -8,13 +8,13 @@
   <meta name="keywords" content="AI API cost calculator, token pricing, GPT-5 pricing, Claude pricing, Gemini pricing, DeepSeek pricing, AI token费用计算器, API成本计算, 模型价格对比">
   <meta name="author" content="AI Token Calculator">
   <meta name="robots" content="index, follow">
-  <link rel="canonical" href="./">
+  <link rel="canonical" href="https://tokencostcalc.com/">
 
   <!-- Open Graph -->
   <meta property="og:title" content="AI Token Cost Calculator | AI Token 费用计算器">
   <meta property="og:description" content="Free AI API token cost calculator. Compare pricing across OpenAI, Anthropic, Google, and DeepSeek models.">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="./">
+  <meta property="og:url" content="https://tokencostcalc.com/">
   <meta property="og:locale" content="en_US">
   <meta property="og:locale:alternate" content="zh_CN">
 
@@ -38,8 +38,15 @@
   }
   </script>
 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500;600&display=swap">
   <link rel="stylesheet" href="css/style.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>☕</text></svg>">
+  <meta name="theme-color" content="#f5f0eb">
+  <link rel="alternate" hreflang="en" href="https://tokencostcalc.com/?lang=en">
+  <link rel="alternate" hreflang="zh" href="https://tokencostcalc.com/?lang=zh">
+  <link rel="alternate" hreflang="x-default" href="https://tokencostcalc.com/">
 </head>
 <body>
   <div class="container">
@@ -50,7 +57,7 @@
 
     <div class="card">
       <div class="field">
-        <label data-i18n="selectModel">Select Model</label>
+        <label data-i18n="selectModel" for="model-select">Select Model</label>
         <select id="model-select"></select>
       </div>
 
@@ -115,72 +122,6 @@
       <h2 class="faq-title" data-i18n="faqTitle">FAQs</h2>
       <div id="faq-list"></div>
     </section>
-
-    <!-- FAQ Structured Data (JSON-LD) -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "How much does GPT-5.5 cost per million tokens in 2026?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "GPT-5.5 costs $5.00 per million input tokens and $30.00 per million output tokens. Cache read tokens are $0.50/M."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Claude Sonnet 4.6 vs GPT-5.4 — which is cheaper?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Claude Sonnet 4.6 costs $3.00/$15.00 per million input/output tokens. GPT-5.4 costs $2.50/$15.00. GPT-5.4 is slightly cheaper for input-heavy tasks."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "What is the cheapest AI API model in 2026?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "DeepSeek V4 Flash is the cheapest at $0.14/M input and $0.28/M output. Other budget options include Gemini 2.5 Flash-Lite, GPT-5.4 Nano, and Claude Haiku 4.5."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "How does AI API prompt caching pricing work?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Cache write tokens cost 1.25x base input (Anthropic). Cache read tokens are 0.1x input price. For example, Claude Sonnet 4.6: input $3.00/M, cache write $3.75/M, cache read $0.30/M."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Gemini 3.1 Pro vs Claude Opus 4.6 pricing",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Gemini 3.1 Pro costs $2.00/$12.00 per million tokens. Claude Opus 4.6 costs $5.00/$25.00. Gemini is 2.5x cheaper on input."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "DeepSeek V4 API pricing — how much does it cost?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "DeepSeek V4 Flash costs $0.14/M input and $0.28/M output. DeepSeek V4 Pro costs $1.74/M input and $3.48/M output."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Which is the most expensive AI model in 2026?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Claude Opus 4.7/4.6 cost $5/$25 per million tokens. GPT-5.5 costs $5/$30. GPT-5.5 Pro ($30/$180) is the highest priced Pro model."
-          }
-        }
-      ]
-    }
-    </script>
 
     <footer>
       <span data-i18n="source">Source: Official websites</span>

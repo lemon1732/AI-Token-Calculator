@@ -56,7 +56,6 @@ const I18n = (() => {
       vendor_google: "Google",
       vendor_deepseek: "DeepSeek",
       placeholder_tokens: "e.g. 1,000,000",
-      normalInput: "Normal",
     },
     zh: {
       title: "AI Token 费用计算器",
@@ -80,7 +79,6 @@ const I18n = (() => {
       vendor_google: "Google",
       vendor_deepseek: "DeepSeek",
       placeholder_tokens: "例如 1,000,000",
-      normalInput: "普通输入",
     },
   };
 
@@ -113,6 +111,7 @@ const I18n = (() => {
     const btn = document.getElementById("lang-toggle");
     if (btn) btn.textContent = currentLang === "zh" ? "EN" : "中文";
     renderFaq();
+    injectFaqJsonLd();
   }
 
   function renderFaq() {
@@ -122,13 +121,14 @@ const I18n = (() => {
     FAQ_DATA.forEach((item, i) => {
       const div = document.createElement("div");
       div.className = "faq-item";
+      const answerId = `faq-answer-${i}`;
       div.innerHTML = `
-        <button class="faq-question" aria-expanded="false">
+        <button class="faq-question" aria-expanded="false" aria-controls="${answerId}">
           <span class="faq-number">${i + 1}.</span>
           <span class="faq-text">${item.q[currentLang]}</span>
           <span class="faq-icon">+</span>
         </button>
-        <div class="faq-answer">
+        <div class="faq-answer" id="${answerId}">
           <p>${item.a[currentLang]}</p>
         </div>
       `;
@@ -143,6 +143,27 @@ const I18n = (() => {
       });
       list.appendChild(div);
     });
+  }
+
+  function injectFaqJsonLd() {
+    const existing = document.getElementById("faq-jsonld");
+    if (existing) existing.remove();
+    const script = document.createElement("script");
+    script.id = "faq-jsonld";
+    script.type = "application/ld+json";
+    script.textContent = JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: FAQ_DATA.map((item) => ({
+        "@type": "Question",
+        name: item.q.en,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: item.a.en,
+        },
+      })),
+    });
+    document.head.appendChild(script);
   }
 
   function init() {

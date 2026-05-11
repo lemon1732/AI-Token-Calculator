@@ -2,3 +2,7 @@
 .claude/
 *.png
 js/lang/
+.DS_Store
+Thumbs.db
+.env
+node_modules/

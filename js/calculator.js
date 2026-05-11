@@ -21,7 +21,7 @@ const Calculator = (() => {
   }
 
   function formatUSD(value) {
-    if (value === 0) return "$0.00";
+    if (value <= 0) return "$0.00";
     if (value < 0.005) return "<$0.01";
     return "$" + value.toFixed(2);
   }

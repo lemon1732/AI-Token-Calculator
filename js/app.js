@@ -4,7 +4,7 @@ const App = (() => {
   function formatNumberWithCommas(str) {
     const num = str.replace(/[^0-9]/g, "");
     if (!num) return "";
-    return parseInt(num).toLocaleString("en-US");
+    return Number(num).toLocaleString("en-US");
   }
 
   function stripCommas(str) {
@@ -25,7 +25,7 @@ const App = (() => {
       });
       select.appendChild(group);
     });
-    select.value = selectedModel.id;
+    if (selectedModel) select.value = selectedModel.id;
   }
 
   function val(id) {
@@ -57,8 +57,8 @@ const App = (() => {
 
     document.getElementById("price-input").textContent = `$${selectedModel.input}/1M`;
     document.getElementById("price-output").textContent = `$${selectedModel.output}/1M`;
-    document.getElementById("price-cw").textContent = `$${selectedModel.cacheWrite}/1M`;
-    document.getElementById("price-cr").textContent = `$${selectedModel.cacheRead}/1M`;
+    document.getElementById("price-cw").textContent = selectedModel.cacheWrite > 0 ? `$${selectedModel.cacheWrite}/1M` : "N/A";
+    document.getElementById("price-cr").textContent = selectedModel.cacheRead > 0 ? `$${selectedModel.cacheRead}/1M` : "N/A";
   }
 
   function bindEvents() {

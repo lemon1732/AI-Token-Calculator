@@ -2,11 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://your-domain.com/</loc>
+    <loc>https://tokencostcalc.com/</loc>
     <lastmod>2026-05-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://your-domain.com/?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="zh" href="https://your-domain.com/?lang=zh"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tokencostcalc.com/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://tokencostcalc.com/?lang=zh"/>
   </url>
 </urlset>
