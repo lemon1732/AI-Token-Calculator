@@ -1,0 +1,402 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+:root {
+  --bg: #f5f0eb;
+  --bg-card: #faf7f3;
+  --mocha: #a47764;
+  --mocha-light: #c9a888;
+  --mocha-pale: #e8ddd2;
+  --mocha-deep: #7a5a48;
+  --brown-dark: #3d2c1e;
+  --brown-mid: #5a4535;
+  --brown-soft: #8b7355;
+  --white: #fffcf8;
+  --shadow: rgba(61, 44, 30, 0.08);
+  --shadow-md: rgba(61, 44, 30, 0.12);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg);
+  color: var(--brown-dark);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 1rem;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+
+body.ready {
+  opacity: 1;
+}
+
+/* noise texture overlay */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 999;
+}
+
+.container {
+  width: 100%;
+  max-width: 520px;
+}
+
+/* ── Header ── */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 2.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--mocha-pale);
+}
+
+header h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 600;
+  font-size: 1.65rem;
+  color: var(--brown-dark);
+  letter-spacing: -0.02em;
+}
+
+#lang-toggle {
+  background: none;
+  border: 1px solid var(--mocha-pale);
+  color: var(--brown-soft);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 500;
+  padding: 0.35rem 0.8rem;
+  border-radius: 2rem;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  letter-spacing: 0.04em;
+}
+
+#lang-toggle:hover {
+  border-color: var(--mocha);
+  color: var(--mocha-deep);
+  background: var(--white);
+}
+
+/* ── Card ── */
+.card {
+  background: var(--bg-card);
+  border-radius: 1.25rem;
+  padding: 2rem;
+  box-shadow:
+    0 1px 3px var(--shadow),
+    0 8px 24px var(--shadow);
+  border: 1px solid rgba(164, 119, 100, 0.08);
+}
+
+/* ── Form fields ── */
+.field {
+  margin-bottom: 1.5rem;
+}
+
+.field:last-child {
+  margin-bottom: 0;
+}
+
+.field label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--brown-soft);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.5rem;
+}
+
+.field select,
+.field input[type="text"] {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.95rem;
+  color: var(--brown-dark);
+  background: var(--white);
+  border: 1px solid var(--mocha-pale);
+  border-radius: 0.75rem;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.field select {
+  background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%238b7355' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  padding-right: 2.5rem;
+  cursor: pointer;
+}
+
+.field select:focus,
+.field input[type="text"]:focus {
+  border-color: var(--mocha);
+  box-shadow: 0 0 0 3px rgba(164, 119, 100, 0.12);
+}
+
+.field input[type="text"]::placeholder {
+  color: var(--mocha-pale);
+  font-weight: 300;
+}
+
+/* ── Slider ── */
+.slider-wrap {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.slider-wrap input[type="range"] {
+  flex: 1;
+  -webkit-appearance: none;
+  appearance: none;
+  height: 6px;
+  background: linear-gradient(to right, var(--mocha), var(--mocha-light));
+  border-radius: 3px;
+  outline: none;
+  cursor: pointer;
+}
+
+.slider-wrap input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--white);
+  border: 2px solid var(--mocha);
+  box-shadow: 0 2px 6px var(--shadow-md);
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+
+.slider-wrap input[type="range"]::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
+}
+
+.slider-wrap input[type="range"]::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--white);
+  border: 2px solid var(--mocha);
+  box-shadow: 0 2px 6px var(--shadow-md);
+  cursor: pointer;
+}
+
+.slider-value {
+  min-width: 3rem;
+  text-align: right;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--mocha-deep);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── Divider ── */
+.divider {
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--mocha-pale), transparent);
+  margin: 2rem 0;
+}
+
+/* ── Results ── */
+.results-header {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--brown-mid);
+  margin-bottom: 1.25rem;
+}
+
+.result-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 0.6rem 0;
+}
+
+.result-row .label {
+  font-size: 0.85rem;
+  color: var(--brown-soft);
+}
+
+.result-row .label span {
+  font-size: 0.75rem;
+  color: var(--mocha-light);
+  margin-left: 0.4rem;
+}
+
+.result-row .amount {
+  font-variant-numeric: tabular-nums;
+  font-weight: 500;
+  font-size: 0.95rem;
+  color: var(--brown-dark);
+}
+
+.result-divider {
+  height: 1px;
+  background: var(--mocha-pale);
+  margin: 0.5rem 0;
+}
+
+.result-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding-top: 0.75rem;
+}
+
+.result-total .label {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--brown-dark);
+}
+
+.result-total .amount {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--mocha-deep);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── Footer ── */
+footer {
+  margin-top: 2rem;
+  text-align: center;
+  font-size: 0.7rem;
+  color: var(--mocha-light);
+  letter-spacing: 0.02em;
+}
+
+footer span {
+  margin: 0 0.4rem;
+  opacity: 0.5;
+}
+
+/* ── Price hint ── */
+.price-hint {
+  font-size: 0.7rem;
+  color: var(--mocha-light);
+  margin-top: 0.3rem;
+  font-style: italic;
+}
+
+/* ── Overflow warning ── */
+.overflow-warning {
+  display: none;
+  margin-top: 0.75rem;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.78rem;
+  color: #9a4e2e;
+  background: #fdf0e8;
+  border: 1px solid #e8c4aa;
+  border-radius: 0.5rem;
+}
+
+/* ── FAQ ── */
+.faq {
+  margin-top: 2rem;
+}
+
+.faq-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: var(--brown-dark);
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.faq-item {
+  border-bottom: 1px solid var(--mocha-pale);
+}
+
+.faq-question {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 0.85rem 0;
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  text-align: left;
+  gap: 0.4rem;
+}
+
+.faq-number {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--brown-dark);
+  min-width: 1.4em;
+}
+
+.faq-text {
+  flex: 1;
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--brown-dark);
+}
+
+.faq-icon {
+  font-size: 1.1rem;
+  font-weight: 300;
+  color: var(--brown-dark);
+  width: 1.2em;
+  text-align: center;
+}
+
+.faq-answer {
+  display: none;
+  overflow: hidden;
+  padding: 0 0 0 1.8em;
+}
+
+.faq-answer.open {
+  display: block;
+}
+
+.faq-answer p {
+  font-size: 0.82rem;
+  line-height: 1.7;
+  color: var(--brown-soft);
+}
+
+/* ── Responsive ── */
+@media (max-width: 560px) {
+  body {
+    padding: 1.25rem 0.75rem;
+  }
+
+  .card {
+    padding: 1.5rem;
+    border-radius: 1rem;
+  }
+
+  header h1 {
+    font-size: 1.35rem;
+  }
+
+  .result-total .amount {
+    font-size: 1.35rem;
+  }
+}
