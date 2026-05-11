@@ -135,6 +135,8 @@
 
         <p>And this is a conservative estimate. If you route to DeepSeek V4 Flash ($0.14/$0.28) instead of Nano, the simple-tier daily cost drops to $9.10, and the monthly total falls to $4,873.</p>
 
+        <p>These numbers aren't theoretical. In projects we've observed, a simple two-tier routing setup — classifying requests by keyword patterns — typically routes 70-85% of traffic to budget models within the first week. The tricky part isn't the routing logic; it's calibrating the threshold so you don't over-route and degrade quality.</p>
+
         <h2>What Is a Model Router?</h2>
 
         <p>A model router is a layer between your application logic and the AI API calls. Instead of hardcoding a single model, you define multiple tiers and a routing strategy:</p>
