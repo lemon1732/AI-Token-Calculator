@@ -81,12 +81,6 @@
       </div>
 
       <div class="field">
-        <label data-i18n="cacheWrite">Cache Write</label>
-        <input type="text" id="cache-write" inputmode="numeric" data-i18n-placeholder="placeholder_tokens" placeholder="e.g. 100000" value="0">
-        <div class="price-hint" id="price-cw"></div>
-      </div>
-
-      <div class="field">
         <label data-i18n="cacheRead">Cache Read</label>
         <input type="text" id="cache-read" inputmode="numeric" data-i18n-placeholder="placeholder_tokens" placeholder="e.g. 100000" value="0">
         <div class="price-hint" id="price-cr"></div>
@@ -104,11 +98,6 @@
       <div class="result-row">
         <span class="label"><span data-i18n="outputCost">Output</span> (<span id="res-output-tokens">0</span> <span data-i18n="tokens">tokens</span>)</span>
         <span class="amount" id="res-output-cost">$0.00</span>
-      </div>
-
-      <div class="result-row">
-        <span class="label"><span data-i18n="cacheWriteCost">Cache Write</span> (<span id="res-cw-tokens">0</span> <span data-i18n="tokens">tokens</span>)</span>
-        <span class="amount" id="res-cw-cost">$0.00</span>
       </div>
 
       <div class="result-row">
@@ -155,6 +144,26 @@
     <section class="faq" id="faq-section">
       <h2 class="faq-title" data-i18n="faqTitle">FAQs</h2>
       <div id="faq-list"></div>
+    </section>
+
+    <!-- Pricing Table for SEO and reference -->
+    <section class="pricing-section" id="pricing-section">
+      <h2 class="pricing-title" data-i18n="pricingTableTitle">AI API Pricing Comparison (2026)</h2>
+      <div class="pricing-table-wrap">
+        <table class="pricing-table" id="pricing-table">
+          <thead>
+            <tr>
+              <th data-i18n="thModel">Model</th>
+              <th class="num" data-i18n="thInput">Input</th>
+              <th class="num" data-i18n="thOutput">Output</th>
+              <th class="num" data-i18n="thCacheRead">Cache Read</th>
+            </tr>
+          </thead>
+          <tbody id="pricing-tbody"></tbody>
+        </table>
+      </div>
+      <p class="pricing-note" data-i18n="tableNote">Prices in USD per 1M tokens. Source: Official websites. Updated May 2026.</p>
+      <p class="pricing-note" data-i18n="discountNote">* DeepSeek V4 Pro: 75% off until 2026/05/31. Original price: $1.74 input, $3.48 output.</p>
     </section>
 
     <footer>

@@ -173,10 +173,10 @@ const MODELS = [
   {
     id: "deepseek-v4-pro",
     vendor: "deepseek",
-    name: "DeepSeek V4 Pro",
-    input: 1.74,
-    output: 3.48,
-    cacheWrite: 1.74,
+    name: "DeepSeek V4 Pro*",
+    input: 0.435,
+    output: 0.87,
+    cacheWrite: 0.435,
     cacheRead: 0.003625,
   },
 ];

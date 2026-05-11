@@ -530,6 +530,120 @@ footer span {
   color: var(--brown-soft);
 }
 
+/* ── Pricing Table ── */
+.pricing-section {
+  margin-top: 2.5rem;
+  max-width: 680px;
+  width: calc(100% + 4rem);
+  margin-left: -2rem;
+}
+
+.pricing-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: var(--brown-dark);
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.pricing-table-wrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border-radius: 1.25rem;
+  box-shadow:
+    0 1px 3px var(--shadow),
+    0 8px 24px var(--shadow);
+  border: 1px solid rgba(164, 119, 100, 0.08);
+}
+
+.pricing-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--bg-card);
+  font-size: 0.82rem;
+}
+
+.pricing-table thead {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+.pricing-table th {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 600;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--white);
+  background: var(--mocha);
+  padding: 0.85rem 1rem;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.pricing-table th.num {
+  text-align: right;
+}
+
+.pricing-table th:first-child {
+  border-radius: 1.25rem 0 0 0;
+}
+
+.pricing-table th:last-child {
+  border-radius: 0 1.25rem 0 0;
+}
+
+.pricing-table td {
+  padding: 0.7rem 1rem;
+  color: var(--brown-dark);
+  border-bottom: 1px solid var(--mocha-pale);
+  vertical-align: middle;
+}
+
+.pricing-table td.num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  font-weight: 500;
+}
+
+.pricing-table .vendor-row td {
+  background: var(--mocha-pale);
+  font-weight: 600;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--mocha-deep);
+  padding: 0.5rem 1rem;
+  border-bottom: 1px solid var(--mocha-light);
+}
+
+.pricing-table tbody tr:hover:not(.vendor-row) {
+  background: var(--white);
+}
+
+.pricing-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.pricing-table .model-name {
+  font-weight: 600;
+  color: var(--brown-dark);
+}
+
+.pricing-table .na {
+  color: var(--mocha-light);
+  font-style: italic;
+}
+
+.pricing-note {
+  margin-top: 1rem;
+  font-size: 0.72rem;
+  color: var(--mocha-light);
+  text-align: center;
+}
+
 /* ── Responsive ── */
 @media (max-width: 560px) {
   body {
@@ -547,6 +661,17 @@ footer span {
 
   .result-total .amount {
     font-size: 1.35rem;
+  }
+
+  .pricing-section {
+    width: calc(100% + 1.5rem);
+    margin-left: -0.75rem;
+  }
+
+  .pricing-table td,
+  .pricing-table th {
+    padding: 0.5rem 0.6rem;
+    font-size: 0.75rem;
   }
 }
 

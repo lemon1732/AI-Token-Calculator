@@ -41,7 +41,6 @@ const App = (() => {
       selectedModel,
       val("input-tokens"),
       val("output-tokens"),
-      val("cache-write"),
       val("cache-read")
     );
 
@@ -51,9 +50,6 @@ const App = (() => {
     document.getElementById("res-output-tokens").textContent = Calculator.formatTokens(result.outputTokens);
     document.getElementById("res-output-cost").textContent = Calculator.formatUSD(result.outputCost);
 
-    document.getElementById("res-cw-tokens").textContent = Calculator.formatTokens(result.cacheWriteTokens);
-    document.getElementById("res-cw-cost").textContent = Calculator.formatUSD(result.cacheWriteCost);
-
     document.getElementById("res-cr-tokens").textContent = Calculator.formatTokens(result.cacheReadTokens);
     document.getElementById("res-cr-cost").textContent = Calculator.formatUSD(result.cacheReadCost);
 
@@ -61,7 +57,6 @@ const App = (() => {
 
     document.getElementById("price-input").textContent = `$${selectedModel.input}/1M`;
     document.getElementById("price-output").textContent = `$${selectedModel.output}/1M`;
-    document.getElementById("price-cw").textContent = selectedModel.cacheWrite > 0 ? `$${selectedModel.cacheWrite}/1M` : "N/A";
     document.getElementById("price-cr").textContent = selectedModel.cacheRead > 0 ? `$${selectedModel.cacheRead}/1M` : "N/A";
   }
 
@@ -105,6 +100,47 @@ const App = (() => {
     }
   }
 
+  function formatPrice(val) {
+    if (val <= 0) return null;
+    if (val < 0.01) return val.toFixed(4);
+    if (val < 1) return val.toFixed(2);
+    return val.toFixed(2);
+  }
+
+  function renderPricingTable() {
+    const tbody = document.getElementById("pricing-tbody");
+    if (!tbody) return;
+    tbody.innerHTML = "";
+
+    const vendorNames = {
+      openai: I18n.t("vendor_openai"),
+      anthropic: I18n.t("vendor_anthropic"),
+      google: I18n.t("vendor_google"),
+      deepseek: I18n.t("vendor_deepseek"),
+    };
+
+    VENDORS.forEach((vendor) => {
+      const headerRow = document.createElement("tr");
+      headerRow.className = "vendor-row";
+      headerRow.innerHTML = `<td colspan="4">${vendorNames[vendor]}</td>`;
+      tbody.appendChild(headerRow);
+
+      MODELS.filter((m) => m.vendor === vendor).forEach((m) => {
+        const tr = document.createElement("tr");
+        const inputP = formatPrice(m.input);
+        const outputP = formatPrice(m.output);
+        const crP = formatPrice(m.cacheRead);
+        tr.innerHTML = `
+          <td class="model-name">${m.name}</td>
+          <td class="num">$${inputP}</td>
+          <td class="num">$${outputP}</td>
+          <td class="num">${crP ? "$" + crP : '<span class="na">N/A</span>'}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+    });
+  }
+
   function bindEvents() {
     // Tab switching
     document.querySelectorAll(".tab").forEach((btn) => {
@@ -118,7 +154,7 @@ const App = (() => {
     });
 
     // Calculator inputs
-    ["input-tokens", "output-tokens", "cache-write", "cache-read"].forEach((id) => {
+    ["input-tokens", "output-tokens", "cache-read"].forEach((id) => {
       const el = document.getElementById(id);
       el.addEventListener("input", (e) => {
         const raw = e.target.value;
@@ -153,6 +189,7 @@ const App = (() => {
       I18n.toggle().then(() => {
         buildModelSelect("model-select", selectedModel);
         buildModelSelect("tc-model-select", tcModel);
+        renderPricingTable();
         updateResult();
         updateTokenCount();
       });
@@ -165,6 +202,7 @@ const App = (() => {
     I18n.init().then(() => {
       buildModelSelect("model-select", selectedModel);
       buildModelSelect("tc-model-select", tcModel);
+      renderPricingTable();
       bindEvents();
       updateResult();
       document.body.classList.add("ready");
