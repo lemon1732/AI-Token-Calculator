@@ -1,0 +1,16 @@
+{
+  "name": "AI Token Cost Calculator",
+  "short_name": "TokenCalc",
+  "description": "Free AI API token cost calculator. Compare pricing across OpenAI, Anthropic, Google, and DeepSeek models.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f5f0eb",
+  "theme_color": "#a47764",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>☕</text></svg>",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

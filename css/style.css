@@ -371,6 +371,21 @@ textarea:focus {
   font-variant-numeric: tabular-nums;
 }
 
+/* ── About ── */
+.about {
+  margin-top: 2rem;
+  padding: 1.25rem 1.5rem;
+  background: var(--bg-card);
+  border-radius: 0.75rem;
+  border: 1px solid rgba(164, 119, 100, 0.08);
+}
+
+.about p {
+  font-size: 0.78rem;
+  line-height: 1.75;
+  color: var(--brown-soft);
+}
+
 /* ── Footer ── */
 footer {
   margin-top: 2rem;

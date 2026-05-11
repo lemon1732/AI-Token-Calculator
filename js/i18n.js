@@ -63,6 +63,7 @@ const I18n = (() => {
       charCount: "Character Count",
       placeholder_text: "Paste or type text...",
       approxNote: "* Non-OpenAI models are estimates",
+      aboutText: '<p>This free AI Token Cost Calculator helps developers and teams compare API pricing across OpenAI GPT-5.5, GPT-5.4, Anthropic Claude Opus 4.6, Sonnet 4.6, Google Gemini 3.1 Pro, and DeepSeek V4 models. Calculate input tokens, output tokens, cache write, and cache read costs instantly. Includes a built-in token counter powered by tiktoken for accurate OpenAI token counting. All prices are updated monthly from official vendor websites.</p>',
     },
     zh: {
       title: "AI Token 费用计算器",
@@ -93,6 +94,7 @@ const I18n = (() => {
       charCount: "字符数",
       placeholder_text: "粘贴或输入文字...",
       approxNote: "* 非 OpenAI 模型为估算值",
+      aboutText: '<p>这个免费的 AI Token 费用计算器帮助开发者和团队比较 OpenAI GPT-5.5、GPT-5.4、Anthropic Claude Opus 4.6、Sonnet 4.6、Google Gemini 3.1 Pro 和 DeepSeek V4 等模型的 API 价格。即时计算输入 token、输出 token、缓存写入和缓存读取费用。内置基于 tiktoken 的 token 计数器，可精确计算 OpenAI 模型的 token 数量。所有价格每月从各厂商官网更新。</p>',
     },
   };
 
