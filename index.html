@@ -55,7 +55,12 @@
       <button id="lang-toggle">中文</button>
     </header>
 
-    <div class="card">
+    <nav class="tabs" role="tablist">
+      <button class="tab active" data-tab="calculator" role="tab" aria-selected="true" data-i18n="tabCalculator">Cost Calculator</button>
+      <button class="tab" data-tab="token-counter" role="tab" aria-selected="false" data-i18n="tabTokenCounter">Token Counter</button>
+    </nav>
+
+    <div class="card" id="calculator-panel" role="tabpanel">
       <div class="field">
         <label data-i18n="selectModel" for="model-select">Select Model</label>
         <select id="model-select"></select>
@@ -117,6 +122,37 @@
       </div>
     </div>
 
+    <div class="card" id="token-counter-panel" role="tabpanel" hidden>
+      <div class="field">
+        <label data-i18n="selectModel" for="tc-model-select">Select Model</label>
+        <select id="tc-model-select"></select>
+      </div>
+
+      <div class="field">
+        <label data-i18n="inputText">Input Text</label>
+        <textarea id="tc-input" rows="8" data-i18n-placeholder="placeholder_text" placeholder="Paste or type text..."></textarea>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="tc-results" aria-live="polite">
+        <div class="tc-row">
+          <span class="tc-label" data-i18n="tokenCount">Token Count</span>
+          <span class="tc-value" id="tc-token-count">0</span>
+        </div>
+        <div class="tc-row">
+          <span class="tc-label" data-i18n="charCount">Character Count</span>
+          <span class="tc-value" id="tc-char-count">0</span>
+        </div>
+      </div>
+
+      <div class="tc-note" data-i18n="approxNote">* Non-OpenAI models are estimates</div>
+      <div class="tc-loading" id="tc-loading" hidden>
+        <span class="tc-spinner"></span>
+        <span data-i18n="loadingTokenizer">Loading tokenizer...</span>
+      </div>
+    </div>
+
     <!-- FAQ Section for SEO long-tail keywords -->
     <section class="faq" id="faq-section" itemscope itemtype="https://schema.org/FAQPage">
       <h2 class="faq-title" data-i18n="faqTitle">FAQs</h2>
@@ -133,6 +169,7 @@
   <script src="js/models.js?v=20260511"></script>
   <script src="js/i18n.js?v=20260511"></script>
   <script src="js/calculator.js?v=20260511"></script>
+  <script src="js/token-counter.js?v=20260511"></script>
   <script src="js/app.js?v=20260511"></script>
 </body>
 </html>
