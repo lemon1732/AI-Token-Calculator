@@ -9,4 +9,16 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://tokencostcalc.com/?lang=en"/>
     <xhtml:link rel="alternate" hreflang="zh" href="https://tokencostcalc.com/?lang=zh"/>
   </url>
+  <url>
+    <loc>https://tokencostcalc.com/about.html</loc>
+    <lastmod>2026-05-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://tokencostcalc.com/privacy.html</loc>
+    <lastmod>2026-05-11</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
 </urlset>

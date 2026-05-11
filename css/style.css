@@ -371,22 +371,63 @@ textarea:focus {
   font-variant-numeric: tabular-nums;
 }
 
-/* ── About ── */
-.about {
-  margin-top: 2rem;
-  padding: 1.25rem 1.5rem;
-  background: var(--bg-card);
-  border-radius: 0.75rem;
-  border: 1px solid rgba(164, 119, 100, 0.08);
+/* ── Static pages (about, privacy) ── */
+.static-page h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--brown-dark);
+  margin-bottom: 1.25rem;
 }
 
-.about p {
-  font-size: 0.78rem;
+.static-page h3 {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--brown-dark);
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.static-page p {
+  font-size: 0.85rem;
   line-height: 1.75;
   color: var(--brown-soft);
+  margin-bottom: 0.75rem;
+}
+
+.static-page ul {
+  padding-left: 1.25rem;
+  margin-bottom: 0.75rem;
+}
+
+.static-page li {
+  font-size: 0.85rem;
+  line-height: 1.75;
+  color: var(--brown-soft);
+  margin-bottom: 0.25rem;
+}
+
+.static-page a {
+  color: var(--mocha-deep);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.static-page a:hover {
+  color: var(--mocha);
 }
 
 /* ── Footer ── */
+footer a {
+  color: var(--brown-soft);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+footer a:hover {
+  color: var(--mocha-deep);
+}
 footer {
   margin-top: 2rem;
   text-align: center;
