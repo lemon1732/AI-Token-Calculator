@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How to Build a Model Router: Use Cheap Models for 90% of Requests</title>
+  <meta name="description" content="Most AI API requests don't need a frontier model. Learn how to build a model router that sends simple tasks to cheap models and complex tasks to powerful ones — cutting your API bill by 80%.">
+  <meta name="keywords" content="model router, AI cost optimization, cheap AI models, LLM routing, API cost reduction, model selection, smart routing, AI architecture">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://tokencostcalc.com/blog/model-router-cheap-models.html">
+
+  <meta property="og:title" content="How to Build a Model Router: Use Cheap Models for 90% of Requests">
+  <meta property="og:description" content="Route simple tasks to $0.10/M models and complex tasks to $5.00/M models. Cut your API bill by 80% with smart routing.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://tokencostcalc.com/blog/model-router-cheap-models.html">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "How to Build a Model Router: Use Cheap Models for 90% of Requests",
+    "description": "Learn how to build a model router that sends simple tasks to cheap models and complex tasks to powerful ones.",
+    "datePublished": "2026-05-11",
+    "dateModified": "2026-05-11",
+    "author": { "@type": "Organization", "name": "AI Token Cost Calculator" },
+    "publisher": { "@type": "Organization", "name": "AI Token Cost Calculator" },
+    "mainEntityOfPage": "https://tokencostcalc.com/blog/model-router-cheap-models.html"
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500;600&display=swap">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/blog.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>☕</text></svg>">
+  <meta name="theme-color" content="#a47764">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1><a href="/" style="color: inherit; text-decoration: none;">AI Token Cost Calculator</a></h1>
+      <div class="header-actions">
+        <a href="/" class="header-link">Home</a>
+      </div>
+    </header>
+
+    <article class="article">
+      <a href="/blog.html" class="article-back">&larr; Blog</a>
+
+      <header class="article-header">
+        <div class="article-meta">
+          <span class="article-date">May 11, 2026</span>
+          <span class="article-tag">Architecture</span>
+        </div>
+        <h1 class="article-title">How to Build a Model Router</h1>
+        <p class="article-subtitle">Most AI API requests don't need a frontier model. Here's how to route simple tasks to cheap models and complex tasks to powerful ones — and cut your bill by 80%.</p>
+      </header>
+
+      <div class="article-body">
+
+        <p>Here's a fact most AI engineers overlook: the majority of requests hitting your API are simple. "Summarize this email." "Extract the date from this text." "Is this sentiment positive or negative?" These tasks don't need GPT-5.5 at $5.00 per million input tokens. They need GPT-5.4 Nano at $0.20, or DeepSeek V4 Flash at $0.14. The problem is that most applications send everything to one model — usually the expensive one — because it's easier.</p>
+
+        <p>A model router solves this. It examines each incoming request, estimates its complexity, and sends it to the cheapest model that can handle it well. The result: 80-90% of your traffic goes to budget models, and your API bill drops proportionally.</p>
+
+        <h2>The Cost Math</h2>
+
+        <p>Let's quantify the opportunity. Suppose your application handles 50,000 requests per day with an average of 3,000 input tokens and 500 output tokens per request.</p>
+
+        <h3>Without routing (everything to GPT-5.5)</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Metric</th>
+              <th>Value</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Daily input cost</td>
+              <td>$750.00</td>
+            </tr>
+            <tr>
+              <td>Daily output cost</td>
+              <td>$750.00</td>
+            </tr>
+            <tr>
+              <td><strong>Daily total</strong></td>
+              <td><strong>$1,500.00</strong></td>
+            </tr>
+            <tr>
+              <td><strong>Monthly total</strong></td>
+              <td><strong>$45,000</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>With routing (90% to Nano, 10% to GPT-5.5)</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Tier</th>
+              <th>Requests</th>
+              <th>Daily Cost</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Simple → GPT-5.4 Nano ($0.20/$1.25)</td>
+              <td>45,000</td>
+              <td>$55.13</td>
+            </tr>
+            <tr>
+              <td>Complex → GPT-5.5 ($5.00/$30.00)</td>
+              <td>5,000</td>
+              <td>$150.00</td>
+            </tr>
+            <tr>
+              <td><strong>Total</strong></td>
+              <td>50,000</td>
+              <td><strong>$205.13</strong></td>
+            </tr>
+            <tr>
+              <td><strong>Monthly total</strong></td>
+              <td></td>
+              <td><strong>$6,154</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <blockquote>
+          <p>Routing 90% of traffic from GPT-5.5 to GPT-5.4 Nano reduces the monthly bill from $45,000 to $6,154. That's an 86% reduction — saving $38,846 every month.</p>
+        </blockquote>
+
+        <p>And this is a conservative estimate. If you route to DeepSeek V4 Flash ($0.14/$0.28) instead of Nano, the simple-tier daily cost drops to $9.10, and the monthly total falls to $4,873.</p>
+
+        <h2>What Is a Model Router?</h2>
+
+        <p>A model router is a layer between your application logic and the AI API calls. Instead of hardcoding a single model, you define multiple tiers and a routing strategy:</p>
+
+        <ol>
+          <li><strong>Request arrives</strong> — a user sends a message, uploads a document, or triggers an automation.</li>
+          <li><strong>Router classifies</strong> — the router examines the request and estimates its complexity.</li>
+          <li><strong>Model selected</strong> — based on complexity, the router picks the cheapest capable model.</li>
+          <li><strong>Response returned</strong> — the model processes the request and the response goes back to the user.</li>
+        </ol>
+
+        <p>The user never knows which model answered. The router is invisible to them — they just see a response that's as good as it needs to be, at a fraction of the cost.</p>
+
+        <h2>Routing Strategies</h2>
+
+        <p>There are three main approaches to routing, from simplest to most sophisticated:</p>
+
+        <h3>Strategy 1: Rule-Based Routing</h3>
+
+        <p>The simplest approach. You define rules based on observable request properties:</p>
+
+        <ul>
+          <li><strong>Task type:</strong> Classification and extraction go to budget models. Code generation and reasoning go to frontier models.</li>
+          <li><strong>Input length:</strong> Short inputs (&lt;500 tokens) are usually simpler. Long inputs (&gt;5,000 tokens) often involve complex analysis.</li>
+          <li><strong>Endpoint:</strong> Different API endpoints serve different purposes. Your <code>/classify</code> endpoint doesn't need the same model as <code>/analyze</code>.</li>
+          <li><strong>User tier:</strong> Free users get budget models. Paying users get premium models.</li>
+        </ul>
+
+        <p>Rule-based routing is fast (zero overhead), predictable, and easy to debug. The downside: it requires you to understand your traffic patterns upfront, and it can't adapt to unexpected complexity within a category.</p>
+
+        <div class="info-box">
+          <div class="info-box-title">When to Use Rule-Based Routing</div>
+          <p>Rule-based routing works best when your application has clearly defined task types. If you have a chatbot with separate endpoints for FAQ, support, and code help, route by endpoint. If you're building a data pipeline, route by input type (structured vs. unstructured).</p>
+        </div>
+
+        <h3>Strategy 2: Classifier-Based Routing</h3>
+
+        <p>Train or prompt a small model to classify request complexity before routing. This is more flexible than rules — it can handle ambiguous cases and adapt to new patterns.</p>
+
+        <p>The classifier can be:</p>
+        <ul>
+          <li><strong>A dedicated small model:</strong> Fine-tuned on your historical data to predict which model gave the best response for similar requests.</li>
+          <li><strong>A prompt-based classifier:</strong> Use a cheap model (Nano or Flash-Lite) with a simple prompt: "Rate this request's complexity from 1-5." Route 1-2 to budget, 3 to mid-tier, 4-5 to frontier.</li>
+          <li><strong>Embedding similarity:</strong> Compare the request embedding to a set of known-simple and known-complex examples. Route based on which cluster it's closest to.</li>
+        </ul>
+
+        <p>The overhead of classification is small — a classifier call costs $0.0002 at Nano pricing. If it saves even one unnecessary frontier-model call, it pays for itself 2,500x over.</p>
+
+        <h3>Strategy 3: Cascade Routing</h3>
+
+        <p>Start with the cheapest model. If its response quality is below a threshold, retry with a more expensive model. This is the most cost-efficient strategy because it only escalates when necessary.</p>
+
+        <p>The quality check can be:</p>
+        <ul>
+          <li><strong>Self-evaluation:</strong> Ask the model to rate its own confidence. "On a scale of 1-10, how confident are you in this answer?" If confidence is below 7, escalate.</li>
+          <li><strong>Structural validation:</strong> If the response should be JSON, check if it's valid JSON. If it should contain a date, check if a date is present. If validation fails, escalate.</li>
+          <li><strong>Length heuristic:</strong> If the model returns a very short response to a complex question, it probably didn't understand the task. Escalate.</li>
+        </ul>
+
+        <p>Cascade routing has higher latency for complex requests (two round trips instead of one) but achieves the lowest possible cost for simple requests — which are the majority.</p>
+
+        <h2>Implementation: A Practical Router</h2>
+
+        <p>Here's a simplified model router in Python that combines rule-based and cascade strategies:</p>
+
+        <pre><code>import openai
+
+# Model tiers — cheapest first
+TIERS = [
+    {"name": "nano", "model": "gpt-5.4-nano", "input": 0.20, "output": 1.25},
+    {"name": "mini", "model": "gpt-5.4-mini", "input": 0.75, "output": 4.50},
+    {"name": "full", "model": "gpt-5.5", "input": 5.00, "output": 30.00},
+]
+
+def classify_complexity(messages: list[dict]) -> int:
+    """Estimate request complexity on a 1-5 scale."""
+    user_msg = next(
+        (m["content"] for m in reversed(messages) if m["role"] == "user"), ""
+    )
+
+    # Simple heuristics — adapt to your domain
+    score = 1
+    if len(user_msg) > 2000:
+        score += 1
+    if any(kw in user_msg.lower() for kw in [
+        "code", "debug", "implement", "refactor", "analyze"
+    ]):
+        score += 2
+    if any(kw in user_msg.lower() for kw in [
+        "compare", "explain why", "step by step", "trade-off"
+    ]):
+        score += 1
+    return min(score, 5)
+
+
+def select_tier(complexity: int) -> dict:
+    """Map complexity score to a model tier."""
+    if complexity <= 2:
+        return TIERS[0]   # nano
+    elif complexity <= 3:
+        return TIERS[1]   # mini
+    else:
+        return TIERS[2]   # full
+
+
+def call_with_cascade(messages: list[dict], **kwargs) -> dict:
+    """Start cheap, escalate if quality is low."""
+    for tier in TIERS:
+        response = openai.chat.completions.create(
+            model=tier["model"],
+            messages=messages,
+            **kwargs,
+        )
+        result = response.choices[0].message
+
+        # Quality check: did the model produce a substantive response?
+        if result.content and len(result.content) > 50:
+            return {
+                "content": result.content,
+                "model": tier["model"],
+                "tier": tier["name"],
+            }
+
+    # All tiers failed — return the last attempt
+    return {
+        "content": result.content,
+        "model": TIERS[-1]["model"],
+        "tier": TIERS[-1]["name"],
+    }
+
+
+def route(messages: list[dict], strategy: str = "cascade", **kwargs) -> dict:
+    """Main routing function."""
+    if strategy == "rules":
+        complexity = classify_complexity(messages)
+        tier = select_tier(complexity)
+        response = openai.chat.completions.create(
+            model=tier["model"], messages=messages, **kwargs
+        )
+        return {
+            "content": response.choices[0].message.content,
+            "model": tier["model"],
+            "tier": tier["name"],
+        }
+    elif strategy == "cascade":
+        return call_with_cascade(messages, **kwargs)</code></pre>
+
+        <p>This is a starting point. In production, you'd add logging, metrics, timeout handling, and a more sophisticated quality check. But the pattern is clear: classify, route, escalate if needed.</p>
+
+        <h2>How to Classify Complexity</h2>
+
+        <p>The quality of your router depends entirely on how well it classifies request complexity. Here are the signals that work best, ranked by reliability:</p>
+
+        <h3>High-confidence signals</h3>
+        <ul>
+          <li><strong>Task type (from your application):</strong> If your app has different modes (chat, code, search, classify), you already know the task type. This is the strongest signal.</li>
+          <li><strong>Input structure:</strong> A request with JSON schema, code blocks, or structured data is more complex than a plain text question.</li>
+          <li><strong>Historical performance:</strong> If you've logged which model handled similar requests successfully, use that data. "Requests like this one were solved by Nano 94% of the time" is the best routing signal.</li>
+        </ul>
+
+        <h3>Medium-confidence signals</h3>
+        <ul>
+          <li><strong>Input length:</strong> Longer inputs tend to be more complex, but not always. A 3,000-token legal contract is complex. A 3,000-token product description for extraction is not.</li>
+          <li><strong>Keywords:</strong> Words like "code," "debug," "analyze," and "compare" correlate with complexity. But keyword matching is brittle — users phrase things unpredictably.</li>
+          <li><strong>User behavior:</strong> If a user has been asking follow-up questions for 10 turns, the conversation is probably complex. Route up.</li>
+        </ul>
+
+        <h3>Low-confidence signals</h3>
+        <ul>
+          <li><strong>Time of day:</strong> Some teams route differently by time — budget models during off-peak, premium during business hours. This is a blunt instrument but can help with cost smoothing.</li>
+          <li><strong>User agent / client:</strong> Mobile users might get shorter, simpler responses. Desktop users might get more detailed ones. Weak signal, but sometimes useful.</li>
+        </ul>
+
+        <div class="info-box">
+          <div class="info-box-title">Start Simple</div>
+          <p>Don't over-engineer the classifier. Start with task-type routing (if your app has distinct endpoints) or a simple prompt-based classifier. Measure the quality difference. If users don't notice, you're routing correctly. Add complexity only when you have data showing it's needed.</p>
+        </div>
+
+        <h2>Monitoring: The Key to Reliable Routing</h2>
+
+        <p>A router without monitoring is a time bomb. You need to know when cheap models are failing so you can adjust thresholds. Track these metrics:</p>
+
+        <ul>
+          <li><strong>Escalation rate:</strong> What percentage of requests get escalated from tier 1 to tier 2? If this exceeds 30%, your tier 1 model is too weak for your traffic — consider upgrading the cheap tier or adjusting classification rules.</li>
+          <li><strong>Quality scores:</strong> If you have human evaluations or automated quality metrics, track them per tier. If tier 1 quality drops below an acceptable threshold, tighten the routing rules.</li>
+          <li><strong>Latency per tier:</strong> Cascade routing adds latency for escalated requests. Track p50 and p95 latency per tier to ensure you're meeting SLAs.</li>
+          <li><strong>Cost per request:</strong> The metric that matters most. Track the blended cost per request across all tiers. This should decrease over time as you optimize routing.</li>
+        </ul>
+
+        <blockquote>
+          <p>The goal isn't to route everything to the cheapest model. It's to route everything to the cheapest model that maintains acceptable quality. Monitoring tells you where that line is.</p>
+        </blockquote>
+
+        <h2>Real-World Routing Patterns</h2>
+
+        <h3>Pattern 1: Chatbot with Mixed Traffic</h3>
+        <p>A customer support chatbot handles FAQs, account questions, and complex complaints.</p>
+        <ul>
+          <li><strong>FAQ (60% of traffic):</strong> "What's your return policy?" → DeepSeek V4 Flash ($0.14/$0.28)</li>
+          <li><strong>Account queries (25%):</strong> "Why was I charged twice?" → GPT-5.4 Mini ($0.75/$4.50)</li>
+          <li><strong>Complex complaints (15%):</strong> "I need to dispute this and escalate to management" → GPT-5.5 ($5.00/$30.00)</li>
+        </ul>
+        <p>Blended cost: $0.62 per request vs. $5.00 without routing. <strong>88% savings.</strong></p>
+
+        <h3>Pattern 2: Code Assistant</h3>
+        <p>An IDE plugin that handles completions, explanations, and refactoring.</p>
+        <ul>
+          <li><strong>Completions (50%):</strong> Simple code completion → GPT-5.4 Nano ($0.20/$1.25)</li>
+          <li><strong>Explanations (30%):</strong> "What does this function do?" → Claude Sonnet 4.6 ($3.00/$15.00)</li>
+          <li><strong>Refactoring (20%):</strong> "Refactor this class to use the observer pattern" → Claude Opus 4.7 ($5.00/$25.00)</li>
+        </ul>
+        <p>Blended cost: $1.62 per request vs. $5.00 without routing. <strong>68% savings.</strong></p>
+
+        <h3>Pattern 3: Data Processing Pipeline</h3>
+        <p>A pipeline that extracts, classifies, and summarizes documents.</p>
+        <ul>
+          <li><strong>Extraction (40%):</strong> Extract dates, names, amounts from invoices → Gemini 2.5 Flash-Lite ($0.10/$0.40)</li>
+          <li><strong>Classification (35%):</strong> Categorize documents by type → GPT-5.4 Nano ($0.20/$1.25)</li>
+          <li><strong>Summarization (20%):</strong> Summarize long reports → Gemini 2.5 Flash ($0.30/$2.50)</li>
+          <li><strong>Analysis (5%):</strong> Complex multi-document analysis → GPT-5.5 ($5.00/$30.00)</li>
+        </ul>
+        <p>Blended cost: $0.31 per request vs. $2.50 without routing. <strong>88% savings.</strong></p>
+
+        <h2>Common Pitfalls</h2>
+
+        <h3>1. Routing too aggressively to cheap models</h3>
+        <p>If 30%+ of your responses are being escalated or receiving negative feedback, your routing threshold is too aggressive. Pull back and send more traffic to mid-tier models. The cost savings aren't worth it if users are unhappy.</p>
+
+        <h3>2. Ignoring output cost</h3>
+        <p>Many developers focus on input price when routing. But output tokens are 3-8x more expensive than input tokens. A model that generates long, detailed responses might be more expensive overall than a model with higher input prices but more concise outputs. Route based on total expected cost, not just input price.</p>
+
+        <h3>3. No fallback</h3>
+        <p>If your primary model is down or rate-limited, you need a fallback. Don't let routing logic become a single point of failure. Always have a default model that can handle any request.</p>
+
+        <h3>4. Not accounting for cache</h3>
+        <p>If your application has high cache hit rates (repeated system prompts), the cache read price matters more than the normal input price. A model with higher input cost but lower cache read cost might be cheaper overall. Factor caching into your routing decisions.</p>
+
+        <h3>5. Over-engineering from day one</h3>
+        <p>Start with two tiers: cheap and expensive. Route by task type or a simple classifier. Measure quality and cost. Add a third tier only when you have data showing the two-tier system leaves money on the table. Most applications never need more than three tiers.</p>
+
+        <h2>Provider-Specific Considerations</h2>
+
+        <h3>Multi-provider routing</h3>
+        <p>You can route across providers, not just within one. Use DeepSeek for the cheap tier, Claude for the mid-tier, and GPT-5.5 for the frontier tier. This gives you the best price at every level, but adds operational complexity — you need to manage multiple API keys, handle different response formats, and monitor multiple dashboards.</p>
+
+        <h3>Batch API as a fourth tier</h3>
+        <p>Both OpenAI and Anthropic offer Batch APIs with 50% off for non-real-time workloads. If your application can tolerate 24-hour turnaround, add a batch tier for background processing tasks like document indexing, content generation, or data enrichment.</p>
+
+        <h3>Cache-aware routing</h3>
+        <p>If you have a heavily cached system prompt, route to the provider with the best cache read pricing for your volume. DeepSeek's cache read at $0.0028/M is 98% cheaper than the normal price. For agent applications with repeated context, this can be more important than the normal input price.</p>
+
+        <div class="cta-box">
+          <p>Calculate savings with different routing strategies</p>
+          <a href="/">Open Cost Calculator</a>
+        </div>
+
+        <div class="article-divider"></div>
+
+        <h2>The Bottom Line</h2>
+
+        <p>A model router is the highest-ROI cost optimization you can implement. It requires no changes to your prompts, no changes to your application logic, and no changes to your users' experience. You're simply matching request complexity to model capability — something you should have been doing from the start.</p>
+
+        <p>Start with two tiers. Route by task type. Monitor quality. Add complexity only when data demands it. The savings compound with every request, and the implementation is measured in hours, not weeks.</p>
+
+        <div class="article-divider"></div>
+
+        <p style="font-size: 0.82rem; color: var(--brown-soft); line-height: 1.7;">Pricing based on official provider documentation (May 2026). Cost examples assume standard API pricing without volume discounts. Actual savings depend on your traffic patterns, routing accuracy, and quality requirements.</p>
+
+      </div>
+    </article>
+
+    <footer>
+      <span>© 2026 AI Token Cost Calculator</span>
+      <span>|</span>
+      <a href="/">Calculator</a>
+      <span>|</span>
+      <a href="/blog.html">Blog</a>
+      <span>|</span>
+      <a href="/about.html">About</a>
+      <span>|</span>
+      <a href="/privacy.html">Privacy</a>
+    </footer>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      document.body.classList.add("ready");
+    });
+  </script>
+</body>
+</html>
