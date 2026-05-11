@@ -63,7 +63,6 @@ const I18n = (() => {
       charCount: "Character Count",
       placeholder_text: "Paste or type text...",
       approxNote: "* Non-OpenAI models are estimates",
-      loadingTokenizer: "Loading tokenizer...",
     },
     zh: {
       title: "AI Token 费用计算器",
@@ -94,7 +93,6 @@ const I18n = (() => {
       charCount: "字符数",
       placeholder_text: "粘贴或输入文字...",
       approxNote: "* 非 OpenAI 模型为估算值",
-      loadingTokenizer: "加载分词器中...",
     },
   };
 

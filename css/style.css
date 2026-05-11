@@ -249,29 +249,6 @@ textarea:focus {
   text-align: center;
 }
 
-.tc-loading {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  margin-top: 0.75rem;
-  font-size: 0.78rem;
-  color: var(--brown-soft);
-}
-
-.tc-spinner {
-  width: 14px;
-  height: 14px;
-  border: 2px solid var(--mocha-pale);
-  border-top-color: var(--mocha);
-  border-radius: 50%;
-  animation: spin 0.8s linear infinite;
-}
-
-@keyframes spin {
-  to { transform: rotate(360deg); }
-}
-
 /* ── Slider ── */
 .slider-wrap {
   display: flex;

@@ -19,8 +19,6 @@ const TokenCounter = (() => {
   async function loadTokenizer() {
     if (loaded || loading || failed) return;
     loading = true;
-    const loadingEl = document.getElementById("tc-loading");
-    if (loadingEl) loadingEl.hidden = false;
 
     try {
       const { getEncoding } = await withTimeout(
@@ -34,7 +32,6 @@ const TokenCounter = (() => {
       failed = true;
     } finally {
       loading = false;
-      if (loadingEl) loadingEl.hidden = true;
     }
   }
 
