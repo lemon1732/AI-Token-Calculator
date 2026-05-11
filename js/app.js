@@ -96,10 +96,11 @@ const App = (() => {
     if (tabName === "calculator") {
       calcPanel.hidden = false;
       tcPanel.hidden = true;
+      I18n.renderFaq("cost");
     } else {
       calcPanel.hidden = true;
       tcPanel.hidden = false;
-      // Lazy load tiktoken on first switch
+      I18n.renderFaq("token");
       TokenCounter.loadTokenizer();
     }
   }
