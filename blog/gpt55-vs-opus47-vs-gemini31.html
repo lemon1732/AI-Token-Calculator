@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GPT-5.5 vs Claude Opus 4.7 vs Gemini 3.1 Pro: 2026 Complete Comparison</title>
+  <meta name="description" content="A detailed comparison of the three most capable AI models in 2026. Pricing, benchmarks, context windows, and real-world cost analysis for GPT-5.5, Claude Opus 4.7, and Gemini 3.1 Pro.">
+  <meta name="keywords" content="GPT-5.5, Claude Opus 4.7, Gemini 3.1 Pro, AI model comparison, API pricing 2026, best AI model, SWE-bench, ARC-AGI">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://tokencostcalc.com/blog/gpt55-vs-opus47-vs-gemini31.html">
+
+  <meta property="og:title" content="GPT-5.5 vs Claude Opus 4.7 vs Gemini 3.1 Pro: 2026 Complete Comparison">
+  <meta property="og:description" content="Pricing, benchmarks, and real-world cost analysis for the three most capable AI models in 2026.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://tokencostcalc.com/blog/gpt55-vs-opus47-vs-gemini31.html">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "GPT-5.5 vs Claude Opus 4.7 vs Gemini 3.1 Pro: 2026 Complete Comparison",
+    "description": "A detailed comparison of the three most capable AI models in 2026. Pricing, benchmarks, context windows, and real-world cost analysis.",
+    "datePublished": "2026-05-11",
+    "dateModified": "2026-05-11",
+    "author": { "@type": "Organization", "name": "AI Token Cost Calculator" },
+    "publisher": { "@type": "Organization", "name": "AI Token Cost Calculator" },
+    "mainEntityOfPage": "https://tokencostcalc.com/blog/gpt55-vs-opus47-vs-gemini31.html"
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500;600&display=swap">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/blog.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>☕</text></svg>">
+  <meta name="theme-color" content="#a47764">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1><a href="/" style="color: inherit; text-decoration: none;">AI Token Cost Calculator</a></h1>
+      <div class="header-actions">
+        <a href="/" class="header-link">Home</a>
+      </div>
+    </header>
+
+    <article class="article">
+      <a href="/blog.html" class="article-back">&larr; Blog</a>
+
+      <header class="article-header">
+        <div class="article-meta">
+          <span class="article-date">May 11, 2026</span>
+          <span class="article-tag">Comparison</span>
+        </div>
+        <h1 class="article-title">GPT-5.5 vs Claude Opus 4.7 vs Gemini 3.1 Pro</h1>
+        <p class="article-subtitle">Three frontier models, three different strengths. A practical guide to choosing the right one — based on benchmarks, pricing, and real-world use cases.</p>
+      </header>
+
+      <div class="article-body">
+
+        <p>The frontier AI landscape in 2026 has never been more competitive. OpenAI shipped GPT-5.5 on April 23, Anthropic released Claude Opus 4.7 on April 16, and Google's Gemini 3.1 Pro has been available since February. Each model leads in different areas, and the price differences are significant. Choosing the wrong one for your use case could mean paying 5x more for worse results.</p>
+
+        <p>This guide breaks down what actually matters: pricing, real benchmark performance, and which model fits which workload.</p>
+
+        <h2>Pricing at a Glance</h2>
+
+        <p>All three models support 1M-token context windows, but their pricing structures are quite different:</p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Model</th>
+              <th>Input</th>
+              <th>Output</th>
+              <th>Cache Read</th>
+              <th>Context</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>GPT-5.5</strong></td>
+              <td>$5.00</td>
+              <td>$30.00</td>
+              <td>$0.50</td>
+              <td>1M</td>
+            </tr>
+            <tr>
+              <td><strong>Claude Opus 4.7</strong></td>
+              <td>$5.00</td>
+              <td>$25.00</td>
+              <td>$0.50</td>
+              <td>1M</td>
+            </tr>
+            <tr>
+              <td><strong>Gemini 3.1 Pro</strong></td>
+              <td>$2.00</td>
+              <td>$12.00</td>
+              <td>—</td>
+              <td>1M</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>Gemini 3.1 Pro is the clear price leader — <strong>2.5x cheaper than GPT-5.5 on input</strong> and <strong>2.5x cheaper on output</strong>. Claude Opus 4.7 and GPT-5.5 are neck-and-neck on input pricing, but Opus is 17% cheaper on output.</p>
+
+        <div class="info-box">
+          <div class="info-box-title">Hidden Cost: Gemini's 200K Threshold</div>
+          <p>Gemini 3.1 Pro doubles its pricing for inputs above 200K tokens — from $2.00 to $4.00 input, and $12.00 to $18.00 output. If your prompts regularly exceed 200K tokens, the cost advantage shrinks significantly.</p>
+        </div>
+
+        <h2>Benchmark Performance</h2>
+
+        <p>Benchmarks don't tell the whole story, but they reveal where each model excels. Here are the key results from independent evaluations (April 2026):</p>
+
+        <h3>Coding & Software Engineering</h3>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Benchmark</th>
+              <th>GPT-5.5</th>
+              <th>Opus 4.7</th>
+              <th>Gemini 3.1</th>
+              <th>Winner</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>SWE-bench Verified</td>
+              <td>82.1%</td>
+              <td>87.6%</td>
+              <td>78.4%</td>
+              <td><strong>Opus 4.7</strong></td>
+            </tr>
+            <tr>
+              <td>SWE-bench Pro</td>
+              <td>58.7%</td>
+              <td>64.3%</td>
+              <td>52.1%</td>
+              <td><strong>Opus 4.7</strong></td>
+            </tr>
+            <tr>
+              <td>Terminal-Bench 2.0</td>
+              <td>82.7%</td>
+              <td>71.2%</td>
+              <td>68.9%</td>
+              <td><strong>GPT-5.5</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p><strong>Claude Opus 4.7 dominates coding benchmarks</strong>, leading SWE-bench Verified by 5.5 points over GPT-5.5. If you're building developer tools, code generation, or automated code review, Opus is the strongest choice. GPT-5.5's strength is Terminal-Bench, which tests command-line and system-level tasks.</p>
+
+        <h3>Reasoning & Problem Solving</h3>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Benchmark</th>
+              <th>GPT-5.5</th>
+              <th>Opus 4.7</th>
+              <th>Gemini 3.1</th>
+              <th>Winner</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>ARC-AGI-2</td>
+              <td>85.0%</td>
+              <td>72.3%</td>
+              <td>76.8%</td>
+              <td><strong>GPT-5.5</strong></td>
+            </tr>
+            <tr>
+              <td>FrontierMath Tier 4</td>
+              <td>35.4%</td>
+              <td>28.1%</td>
+              <td>31.7%</td>
+              <td><strong>GPT-5.5</strong></td>
+            </tr>
+            <tr>
+              <td>MCP-Atlas</td>
+              <td>68.5%</td>
+              <td>77.3%</td>
+              <td>63.2%</td>
+              <td><strong>Opus 4.7</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>GPT-5.5 leads on abstract reasoning (ARC-AGI-2) and advanced mathematics (FrontierMath). But Opus 4.7 wins MCP-Atlas, which tests multi-step tool use and structured reasoning — closer to real-world agent workflows.</p>
+
+        <h3>Knowledge & Multilingual</h3>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Benchmark</th>
+              <th>GPT-5.5</th>
+              <th>Opus 4.7</th>
+              <th>Gemini 3.1</th>
+              <th>Winner</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>BrowseComp</td>
+              <td>90.1%</td>
+              <td>79.3%</td>
+              <td>85.9%</td>
+              <td><strong>GPT-5.5</strong></td>
+            </tr>
+            <tr>
+              <td>MMMLU (multilingual)</td>
+              <td>88.4%</td>
+              <td>86.7%</td>
+              <td>92.6%</td>
+              <td><strong>Gemini 3.1</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>GPT-5.5 is the best at web research and information retrieval. Gemini 3.1 Pro leads in multilingual understanding — a significant edge for global applications.</p>
+
+        <h2>The Hallucination Problem</h2>
+
+        <p>Benchmarks measure capability, but reliability matters just as much. The AA-Omniscience hallucination rate reveals a critical difference:</p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Model</th>
+              <th>Hallucination Rate</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Claude Opus 4.7</strong></td>
+              <td>36%</td>
+            </tr>
+            <tr>
+              <td><strong>Gemini 3.1 Pro</strong></td>
+              <td>50%</td>
+            </tr>
+            <tr>
+              <td><strong>GPT-5.5</strong></td>
+              <td>86%</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <blockquote>
+          <p>GPT-5.5's 86% hallucination rate on the AA-Omniscience benchmark is a serious concern for any application where accuracy matters. Opus 4.7 is more than 2x safer.</p>
+        </blockquote>
+
+        <p>This doesn't mean GPT-5.5 is unusable — it means you need stronger guardrails. For legal, medical, financial, or compliance-sensitive applications, Opus 4.7's lower hallucination rate makes it the safer default.</p>
+
+        <h2>Cost Analysis: Three Real Scenarios</h2>
+
+        <h3>Scenario 1: Chatbot (10K messages/day)</h3>
+        <p>A customer support chatbot with a 2K system prompt, 3K conversation history, and 500-token average response.</p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Model</th>
+              <th>Daily Cost</th>
+              <th>Monthly Cost</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>GPT-5.5</td>
+              <td>$250.00</td>
+              <td>$7,500</td>
+            </tr>
+            <tr>
+              <td>Opus 4.7</td>
+              <td>$212.50</td>
+              <td>$6,375</td>
+            </tr>
+            <tr>
+              <td>Gemini 3.1 Pro</td>
+              <td>$130.00</td>
+              <td>$3,900</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>Scenario 2: Code Review Agent (1K reviews/day)</h3>
+        <p>An automated code review tool that processes 5K tokens of code context and generates 2K tokens of feedback per review.</p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Model</th>
+              <th>Daily Cost</th>
+              <th>Monthly Cost</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>GPT-5.5</td>
+              <td>$85.00</td>
+              <td>$2,550</td>
+            </tr>
+            <tr>
+              <td>Opus 4.7</td>
+              <td>$75.00</td>
+              <td>$2,250</td>
+            </tr>
+            <tr>
+              <td>Gemini 3.1 Pro</td>
+              <td>$34.00</td>
+              <td>$1,020</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>Scenario 3: Long Document Analysis (500 docs/day)</h3>
+        <p>Processing 200K-token documents with 1K-token summaries. This hits Gemini's 200K threshold.</p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Model</th>
+              <th>Daily Cost</th>
+              <th>Monthly Cost</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>GPT-5.5</td>
+              <td>$515.00</td>
+              <td>$15,450</td>
+            </tr>
+            <tr>
+              <td>Opus 4.7</td>
+              <td>$512.50</td>
+              <td>$15,375</td>
+            </tr>
+            <tr>
+              <td>Gemini 3.1 Pro</td>
+              <td>$206.00</td>
+              <td>$6,180</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="info-box">
+          <div class="info-box-title">Key Takeaway</div>
+          <p>Gemini 3.1 Pro is 40–60% cheaper than the competition in every scenario. But for code-related tasks where accuracy is critical, Opus 4.7's superior SWE-bench scores may justify the higher cost. GPT-5.5 is the most expensive option but leads on reasoning and research tasks.</p>
+        </div>
+
+        <h2>Which Model Should You Choose?</h2>
+
+        <h3>Choose GPT-5.5 when:</h3>
+        <ul>
+          <li>You need the strongest abstract reasoning and mathematical capabilities</li>
+          <li>Your application involves web research or information retrieval (BrowseComp leader)</li>
+          <li>You're already in the OpenAI ecosystem and want API compatibility</li>
+          <li>You can implement strong hallucination detection and fact-checking</li>
+        </ul>
+
+        <h3>Choose Claude Opus 4.7 when:</h3>
+        <ul>
+          <li>You're building code generation, code review, or developer tools (SWE-bench leader)</li>
+          <li>Accuracy and low hallucination rates are critical (legal, medical, financial)</li>
+          <li>You need strong multi-step reasoning with tool use (MCP-Atlas leader)</li>
+          <li>You're building AI agents that need to be reliable and careful</li>
+        </ul>
+
+        <h3>Choose Gemini 3.1 Pro when:</h3>
+        <ul>
+          <li>Cost is the primary concern — it's 2.5x cheaper than alternatives</li>
+          <li>You need strong multilingual support (MMMLU leader)</li>
+          <li>Your prompts stay under 200K tokens (to avoid the price doubling)</li>
+          <li>You're building high-volume applications where per-call cost matters most</li>
+        </ul>
+
+        <div class="article-divider"></div>
+
+        <h2>Don't Forget the Cheaper Alternatives</h2>
+
+        <p>Not every task needs a frontier model. For many applications, mid-tier models deliver 90% of the capability at a fraction of the cost:</p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Model</th>
+              <th>Input</th>
+              <th>Output</th>
+              <th>Best For</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Claude Sonnet 4.6</strong></td>
+              <td>$3.00</td>
+              <td>$15.00</td>
+              <td>General coding, chatbots</td>
+            </tr>
+            <tr>
+              <td><strong>GPT-5.4</strong></td>
+              <td>$2.50</td>
+              <td>$15.00</td>
+              <td>General purpose, structured output</td>
+            </tr>
+            <tr>
+              <td><strong>DeepSeek V4 Pro*</strong></td>
+              <td>$0.435</td>
+              <td>$0.87</td>
+              <td>Budget coding, high-volume</td>
+            </tr>
+            <tr>
+              <td><strong>GPT-5.4 Nano</strong></td>
+              <td>$0.20</td>
+              <td>$1.25</td>
+              <td>Simple classification, extraction</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p style="font-size: 0.78rem; color: var(--mocha-light);">* DeepSeek V4 Pro: 75% off until May 31, 2026.</p>
+
+        <p>For a chatbot, Claude Sonnet 4.6 at $3/$15 delivers excellent quality at 40% less than Opus. For simple extraction tasks, GPT-5.4 Nano at $0.20/$1.25 is 25x cheaper than GPT-5.5. The right model depends on your task complexity, not just raw capability.</p>
+
+        <div class="cta-box">
+          <p>Compare costs across all models side by side</p>
+          <a href="/">Open Cost Calculator</a>
+        </div>
+
+        <div class="article-divider"></div>
+
+        <p style="font-size: 0.82rem; color: var(--brown-soft); line-height: 1.7;">Benchmark data sourced from Mindwired AI, Vellum, and Artificial Analysis (April 2026). Pricing from official provider documentation. Hallucination rates from AA-Omniscience benchmark. All figures reflect standard API pricing without volume discounts.</p>
+
+      </div>
+    </article>
+
+    <footer>
+      <span>© 2026 AI Token Cost Calculator</span>
+      <span>|</span>
+      <a href="/">Calculator</a>
+      <span>|</span>
+      <a href="/blog.html">Blog</a>
+      <span>|</span>
+      <a href="/about.html">About</a>
+      <span>|</span>
+      <a href="/privacy.html">Privacy</a>
+    </footer>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      document.body.classList.add("ready");
+    });
+  </script>
+</body>
+</html>

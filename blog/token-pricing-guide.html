@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>What Are Tokens? A Complete Guide to AI API Pricing</title>
+  <meta name="description" content="Learn what tokens are, how AI providers count them differently, and how to estimate your API costs. A practical guide for developers using OpenAI, Claude, Gemini, and DeepSeek.">
+  <meta name="keywords" content="AI tokens, token pricing, API cost, GPT tokens, Claude tokens, tiktoken, token counter, AI API billing">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://tokencostcalc.com/blog/token-pricing-guide.html">
+
+  <meta property="og:title" content="What Are Tokens? A Complete Guide to AI API Pricing">
+  <meta property="og:description" content="Learn what tokens are, how AI providers count them differently, and how to estimate your API costs.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://tokencostcalc.com/blog/token-pricing-guide.html">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "What Are Tokens? A Complete Guide to AI API Pricing",
+    "description": "Learn what tokens are, how AI providers count them differently, and how to estimate your API costs.",
+    "datePublished": "2026-05-11",
+    "dateModified": "2026-05-11",
+    "author": { "@type": "Organization", "name": "AI Token Cost Calculator" },
+    "publisher": { "@type": "Organization", "name": "AI Token Cost Calculator" },
+    "mainEntityOfPage": "https://tokencostcalc.com/blog/token-pricing-guide.html"
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500;600&display=swap">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/blog.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>☕</text></svg>">
+  <meta name="theme-color" content="#a47764">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1><a href="/" style="color: inherit; text-decoration: none;">AI Token Cost Calculator</a></h1>
+      <div class="header-actions">
+        <a href="/" class="header-link">Home</a>
+      </div>
+    </header>
+
+    <article class="article">
+      <a href="/blog.html" class="article-back">&larr; Blog</a>
+
+      <header class="article-header">
+        <div class="article-meta">
+          <span class="article-date">May 11, 2026</span>
+          <span class="article-tag">Guide</span>
+        </div>
+        <h1 class="article-title">What Are Tokens? A Complete Guide to AI API Pricing</h1>
+        <p class="article-subtitle">Everything you need to know about the fundamental unit of AI billing — from tokenization basics to real-world cost estimation.</p>
+      </header>
+
+      <div class="article-body">
+
+        <p>Every time you send a prompt to an AI model — whether it's GPT-5.5, Claude Opus 4.7, or Gemini 3.1 Pro — you're charged by the token. But what exactly is a token? It's not a word, not a character, and not a byte. Understanding tokens is the first step to controlling your AI API costs, and it's simpler than most developers think.</p>
+
+        <h2>What Is a Token?</h2>
+
+        <p>A <strong>token</strong> is the smallest unit of text that an AI model processes. Before your text reaches the model, it passes through a <strong>tokenizer</strong> — a program that splits your input into chunks. These chunks can be whole words, parts of words, punctuation marks, or even spaces.</p>
+
+        <p>For example, the sentence <code>Hello, how are you?</code> might be split into five tokens: <code>Hello</code> <code>,</code> <code> how</code> <code> are</code> <code> you</code> <code>?</code>. Notice that the space before "how" is part of the token — tokenizers treat spaces as meaningful characters.</p>
+
+        <blockquote>
+          <p>A token is roughly 4 characters in English, or about ¾ of a word. But this is just an approximation — the actual count depends on the specific text and the tokenizer used.</p>
+        </blockquote>
+
+        <p>The key insight is that <strong>different AI providers use different tokenizers</strong>. The same text will produce different token counts across OpenAI, Anthropic, and Google. This means the same prompt can cost different amounts depending on which model you use.</p>
+
+        <h2>How Different Providers Count Tokens</h2>
+
+        <p>Each major AI provider has its own tokenization method. Here's how they compare:</p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Provider</th>
+              <th>Tokenizer</th>
+              <th>~Tokens per Word</th>
+              <th>Chinese Char</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>OpenAI</strong> (GPT-5.5, GPT-5.4)</td>
+              <td>tiktoken (o200k_base)</td>
+              <td>1.3</td>
+              <td>2-3 tokens</td>
+            </tr>
+            <tr>
+              <td><strong>Anthropic</strong> (Claude Opus/Sonnet)</td>
+              <td>Proprietary</td>
+              <td>~1.3</td>
+              <td>1.5-2.5 tokens</td>
+            </tr>
+            <tr>
+              <td><strong>Google</strong> (Gemini)</td>
+              <td>SentencePiece</td>
+              <td>~1.2</td>
+              <td>1-2 tokens</td>
+            </tr>
+            <tr>
+              <td><strong>DeepSeek</strong></td>
+              <td>tiktoken-compatible</td>
+              <td>~1.3</td>
+              <td>2-3 tokens</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="info-box">
+          <div class="info-box-title">Practical Tip</div>
+          <p>1,000 English words ≈ 1,300 tokens. 500 Chinese characters ≈ 1,000–1,500 tokens. Use these ratios for quick estimates before calculating exact costs.</p>
+        </div>
+
+        <h2>How AI API Pricing Works</h2>
+
+        <p>AI providers charge per million tokens, but not all tokens are priced equally. There are typically three pricing tiers:</p>
+
+        <h3>Input Tokens</h3>
+        <p>These are the tokens you send to the model — your prompt, system instructions, conversation history, and any context you provide. Input tokens are almost always cheaper than output tokens because the model processes them in parallel.</p>
+
+        <h3>Output Tokens</h3>
+        <p>These are the tokens the model generates in response. Output tokens cost more because the model generates them one at a time, which requires more computation. Most providers charge 3–6x more for output than input.</p>
+
+        <h3>Cache Read Tokens</h3>
+        <p>If you send the same prefix (like a system prompt) repeatedly, providers can cache it. Cached tokens are dramatically cheaper — typically <strong>90% less</strong> than regular input tokens. This is one of the most effective ways to reduce costs for applications with repetitive prompts.</p>
+
+        <h2>Real-World Pricing Comparison (May 2026)</h2>
+
+        <p>Here's what the major providers actually charge, per million tokens:</p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Model</th>
+              <th>Input</th>
+              <th>Output</th>
+              <th>Cache Read</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>GPT-5.5</strong></td>
+              <td>$5.00</td>
+              <td>$30.00</td>
+              <td>$0.50</td>
+            </tr>
+            <tr>
+              <td><strong>GPT-5.4</strong></td>
+              <td>$2.50</td>
+              <td>$15.00</td>
+              <td>$0.25</td>
+            </tr>
+            <tr>
+              <td><strong>Claude Opus 4.7</strong></td>
+              <td>$5.00</td>
+              <td>$25.00</td>
+              <td>$0.50</td>
+            </tr>
+            <tr>
+              <td><strong>Claude Sonnet 4.6</strong></td>
+              <td>$3.00</td>
+              <td>$15.00</td>
+              <td>$0.30</td>
+            </tr>
+            <tr>
+              <td><strong>Gemini 3.1 Pro</strong></td>
+              <td>$2.00</td>
+              <td>$12.00</td>
+              <td>$0.50</td>
+            </tr>
+            <tr>
+              <td><strong>DeepSeek V4 Pro*</strong></td>
+              <td>$0.435</td>
+              <td>$0.87</td>
+              <td>$0.0036</td>
+            </tr>
+            <tr>
+              <td><strong>DeepSeek V4 Flash</strong></td>
+              <td>$0.14</td>
+              <td>$0.28</td>
+              <td>$0.0028</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p style="font-size: 0.78rem; color: var(--mocha-light);">* DeepSeek V4 Pro: 75% off until May 31, 2026. Original price: $1.74 input, $3.48 output.</p>
+
+        <h2>How to Estimate Your Costs</h2>
+
+        <p>Let's walk through a real example. Suppose you're building a chatbot that:</p>
+
+        <ul>
+          <li>Sends a 2,000-token system prompt with each request</li>
+          <li>Maintains 3,000 tokens of conversation history</li>
+          <li>Generates about 500 tokens of response per message</li>
+          <li>Handles 10,000 messages per day</li>
+        </ul>
+
+        <p><strong>Daily token usage:</strong></p>
+        <ul>
+          <li>Input: (2,000 + 3,000) × 10,000 = 50M tokens</li>
+          <li>Output: 500 × 10,000 = 5M tokens</li>
+        </ul>
+
+        <p><strong>Using GPT-5.4 ($2.50 input / $15.00 output):</strong></p>
+        <ul>
+          <li>Input cost: 50 × $2.50 = $125.00</li>
+          <li>Output cost: 5 × $15.00 = $75.00</li>
+          <li><strong>Daily total: $200.00</strong></li>
+        </ul>
+
+        <p><strong>With prompt caching (system prompt cached):</strong></p>
+        <ul>
+          <li>Input cost: (20 × $0.25) + (30 × $2.50) = $5.00 + $75.00 = $80.00</li>
+          <li>Output cost: 5 × $15.00 = $75.00</li>
+          <li><strong>Daily total: $155.00 (22% savings)</strong></li>
+        </ul>
+
+        <p>Switching to DeepSeek V4 Flash would bring the daily cost down to just <strong>$8.40</strong> — a 96% reduction. The trade-off is model capability, but for many applications, it's more than enough.</p>
+
+        <div class="info-box">
+          <div class="info-box-title">Quick Reference</div>
+          <p><strong>1M input tokens</strong> ≈ 750,000 English words ≈ two full-length novels</p>
+          <p><strong>1M output tokens</strong> ≈ the content of a 300-page book</p>
+          <p>At GPT-5.4 pricing, that's $2.50 to read two novels, and $15.00 to generate one.</p>
+        </div>
+
+        <h2>5 Ways to Reduce Your Token Costs</h2>
+
+        <ol>
+          <li><strong>Use prompt caching.</strong> If your application sends the same system prompt repeatedly, caching saves up to 90% on those tokens. Most providers support this automatically.</li>
+          <li><strong>Shorten your prompts.</strong> Every token in your system prompt is repeated with every request. Remove unnecessary instructions, compress verbose examples, and use concise language.</li>
+          <li><strong>Choose the right model.</strong> Not every task needs GPT-5.5. Use cheaper models like DeepSeek V4 Flash or GPT-5.4 Nano for simple tasks, and reserve premium models for complex reasoning.</li>
+          <li><strong>Limit output length.</strong> Set a reasonable <code>max_tokens</code> parameter. If you only need a short answer, don't let the model generate a novel.</li>
+          <li><strong>Count before you send.</strong> Use a <a href="/">token counter</a> to measure your input size before making API calls. Unexpected token counts are the #1 cause of budget overruns.</li>
+        </ol>
+
+        <div class="cta-box">
+          <p>Calculate your exact costs for any model</p>
+          <a href="/">Open Cost Calculator</a>
+        </div>
+
+        <div class="article-divider"></div>
+
+        <p style="font-size: 0.82rem; color: var(--brown-soft); line-height: 1.7;">This guide is updated regularly to reflect current pricing. Last updated May 2026. Prices are sourced directly from each provider's official documentation. For the most accurate and up-to-date rates, always check the provider's pricing page.</p>
+
+      </div>
+    </article>
+
+    <footer>
+      <span>© 2026 AI Token Cost Calculator</span>
+      <span>|</span>
+      <a href="/">Calculator</a>
+      <span>|</span>
+      <a href="/blog.html">Blog</a>
+      <span>|</span>
+      <a href="/about.html">About</a>
+      <span>|</span>
+      <a href="/privacy.html">Privacy</a>
+    </footer>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      document.body.classList.add("ready");
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How to Save 90% on AI API Costs with Prompt Caching</title>
+  <meta name="description" content="Prompt caching can reduce your AI API input costs by up to 90%. Learn how it works across OpenAI, Anthropic, Google, and DeepSeek — with real pricing examples and code patterns.">
+  <meta name="keywords" content="prompt caching, AI API cost, save money AI, cached input tokens, OpenAI caching, Anthropic caching, DeepSeek caching, reduce API costs">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://tokencostcalc.com/blog/prompt-caching-guide.html">
+
+  <meta property="og:title" content="How to Save 90% on AI API Costs with Prompt Caching">
+  <meta property="og:description" content="Prompt caching can reduce your AI API input costs by up to 90%. A practical guide with real pricing examples.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://tokencostcalc.com/blog/prompt-caching-guide.html">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "How to Save 90% on AI API Costs with Prompt Caching",
+    "description": "Prompt caching can reduce your AI API input costs by up to 90%. Learn how it works with real pricing examples and code patterns.",
+    "datePublished": "2026-05-11",
+    "dateModified": "2026-05-11",
+    "author": { "@type": "Organization", "name": "AI Token Cost Calculator" },
+    "publisher": { "@type": "Organization", "name": "AI Token Cost Calculator" },
+    "mainEntityOfPage": "https://tokencostcalc.com/blog/prompt-caching-guide.html"
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500;600&display=swap">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/blog.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>☕</text></svg>">
+  <meta name="theme-color" content="#a47764">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1><a href="/" style="color: inherit; text-decoration: none;">AI Token Cost Calculator</a></h1>
+      <div class="header-actions">
+        <a href="/" class="header-link">Home</a>
+      </div>
+    </header>
+
+    <article class="article">
+      <a href="/blog.html" class="article-back">&larr; Blog</a>
+
+      <header class="article-header">
+        <div class="article-meta">
+          <span class="article-date">May 11, 2026</span>
+          <span class="article-tag">Guide</span>
+        </div>
+        <h1 class="article-title">How to Save 90% on AI API Costs with Prompt Caching</h1>
+        <p class="article-subtitle">Every major AI provider now offers prompt caching. Here's how it works, what it costs, and how to structure your prompts to maximize savings.</p>
+      </header>
+
+      <div class="article-body">
+
+        <p>If your application sends the same system prompt, tool definitions, or document context with every API request, you're paying for the same tokens over and over again. Prompt caching solves this by storing the processed representation of repeated text so the model doesn't have to recompute it. The result: input costs drop by 90% or more on cached tokens.</p>
+
+        <p>The best part is that on most providers, caching happens automatically. You don't need to change your code — you just need to understand how it works and structure your prompts to take advantage of it.</p>
+
+        <h2>How Prompt Caching Works</h2>
+
+        <p>When you send a prompt to an AI model, the model processes every token from scratch — reading your system instructions, understanding the context, and building internal representations. This is expensive computation.</p>
+
+        <p>Prompt caching stores the result of that initial processing. When you send the same prefix again (the beginning of your prompt), the provider recognizes it and reuses the cached computation. The model only needs to process the new, unique part of your request.</p>
+
+        <blockquote>
+          <p>Think of it like compiling code. The first time, the compiler processes everything from scratch. After that, it only recompiles what changed. Prompt caching does the same thing for your API calls.</p>
+        </blockquote>
+
+        <p>There are two costs associated with caching:</p>
+
+        <ul>
+          <li><strong>Cache write</strong> — The first time a prefix is cached, you pay a small premium (varies by provider). This happens once.</li>
+          <li><strong>Cache read</strong> — Every subsequent call that hits the cache pays a dramatically reduced rate. This is where the 90% savings come from.</li>
+        </ul>
+
+        <h2>Caching Pricing Across Providers</h2>
+
+        <p>Here's what each major provider charges for cached tokens (per million tokens):</p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Provider</th>
+              <th>Normal Input</th>
+              <th>Cache Write</th>
+              <th>Cache Read</th>
+              <th>Savings</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Anthropic</strong> (Opus 4.7)</td>
+              <td>$5.00</td>
+              <td>$6.25</td>
+              <td>$0.50</td>
+              <td>90%</td>
+            </tr>
+            <tr>
+              <td><strong>Anthropic</strong> (Sonnet 4.6)</td>
+              <td>$3.00</td>
+              <td>$3.75</td>
+              <td>$0.30</td>
+              <td>90%</td>
+            </tr>
+            <tr>
+              <td><strong>OpenAI</strong> (GPT-5.5)</td>
+              <td>$5.00</td>
+              <td>$5.00</td>
+              <td>$0.50</td>
+              <td>90%</td>
+            </tr>
+            <tr>
+              <td><strong>OpenAI</strong> (GPT-5.4)</td>
+              <td>$2.50</td>
+              <td>$2.50</td>
+              <td>$0.25</td>
+              <td>90%</td>
+            </tr>
+            <tr>
+              <td><strong>DeepSeek</strong> (V4 Flash)</td>
+              <td>$0.14</td>
+              <td>$0.14</td>
+              <td>$0.0028</td>
+              <td>98%</td>
+            </tr>
+            <tr>
+              <td><strong>DeepSeek</strong> (V4 Pro*)</td>
+              <td>$0.435</td>
+              <td>$0.435</td>
+              <td>$0.0036</td>
+              <td>99%</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p style="font-size: 0.78rem; color: var(--mocha-light);">* DeepSeek V4 Pro: 75% off until May 31, 2026. DeepSeek cache read pricing is 1/10 of the launch price as of April 26, 2026.</p>
+
+        <div class="info-box">
+          <div class="info-box-title">Key Differences</div>
+          <p><strong>Anthropic</strong> charges a 25% premium on cache writes — you pay $6.25 instead of $5.00 the first time. But subsequent reads are 90% cheaper.</p>
+          <p><strong>OpenAI</strong> charges the same price for cache writes as normal input — no premium, no penalty.</p>
+          <p><strong>DeepSeek</strong> offers the most aggressive discount: cache reads are 98-99% cheaper than normal input. At $0.0028/M, cached tokens are essentially free.</p>
+        </div>
+
+        <h2>How Much Can You Save? A Real Example</h2>
+
+        <p>Let's say you're building an AI coding assistant with a 4,000-token system prompt that defines the assistant's behavior, coding standards, and tool instructions. This prompt is sent with every request. You handle 50,000 requests per day, each with 1,000 tokens of unique user input.</p>
+
+        <h3>Without caching</h3>
+        <p>Every request processes the full 5,000 tokens (4K system + 1K user input).</p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Model</th>
+              <th>Daily Input Tokens</th>
+              <th>Daily Cost</th>
+              <th>Monthly Cost</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>GPT-5.5</td>
+              <td>250M</td>
+              <td>$1,250</td>
+              <td>$37,500</td>
+            </tr>
+            <tr>
+              <td>Claude Sonnet 4.6</td>
+              <td>250M</td>
+              <td>$750</td>
+              <td>$22,500</td>
+            </tr>
+            <tr>
+              <td>DeepSeek V4 Flash</td>
+              <td>250M</td>
+              <td>$35</td>
+              <td>$1,050</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>With caching (system prompt cached)</h3>
+        <p>The 4K system prompt is cached after the first request. Subsequent requests pay cache read pricing for those tokens.</p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Model</th>
+              <th>Cache Write</th>
+              <th>Cache Read</th>
+              <th>Unique Input</th>
+              <th>Daily Cost</th>
+              <th>Monthly Cost</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>GPT-5.5</td>
+              <td>$0.02</td>
+              <td>$99.98</td>
+              <td>$125.00</td>
+              <td>$225</td>
+              <td>$6,750</td>
+            </tr>
+            <tr>
+              <td>Claude Sonnet 4.6</td>
+              <td>$0.015</td>
+              <td>$59.99</td>
+              <td>$75.00</td>
+              <td>$135</td>
+              <td>$4,050</td>
+            </tr>
+            <tr>
+              <td>DeepSeek V4 Flash</td>
+              <td>$0.003</td>
+              <td>$0.56</td>
+              <td>$7.00</td>
+              <td>$7.56</td>
+              <td>$227</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p><strong>Savings with caching:</strong></p>
+        <ul>
+          <li>GPT-5.5: <strong>82% reduction</strong> ($37,500 → $6,750/month)</li>
+          <li>Claude Sonnet 4.6: <strong>82% reduction</strong> ($22,500 → $4,050/month)</li>
+          <li>DeepSeek V4 Flash: <strong>78% reduction</strong> ($1,050 → $227/month)</li>
+        </ul>
+
+        <blockquote>
+          <p>A 4,000-token system prompt sent 50,000 times per day costs $1,250/day on GPT-5.5 without caching. With caching, it costs $225. That's $30,000 saved every month.</p>
+        </blockquote>
+
+        <h2>What Gets Cached?</h2>
+
+        <p>Caching works on the <strong>prefix</strong> of your prompt — the beginning portion that stays the same across requests. Here's what typically qualifies:</p>
+
+        <h3>System prompts</h3>
+        <p>The instructions that define your assistant's behavior. These are usually identical across all requests and are the single biggest opportunity for caching.</p>
+
+        <h3>Tool definitions</h3>
+        <p>If you use function calling, the tool schemas are sent with every request. These can be thousands of tokens and rarely change — perfect for caching.</p>
+
+        <h3>Document context</h3>
+        <p>If you're building a RAG system where users ask questions about the same document, the document content stays the same across requests. Cache it.</p>
+
+        <h3>Conversation history (partially)</h3>
+        <p>In multi-turn conversations, earlier messages stay the same as new messages are added. The prefix of the conversation history can be cached.</p>
+
+        <div class="info-box">
+          <div class="info-box-title">Minimum Length Requirements</div>
+          <p>Most providers require a minimum prompt length for caching to activate:</p>
+          <p><strong>Anthropic:</strong> 1,024 tokens (Claude), 2,048 tokens (Opus)</p>
+          <p><strong>OpenAI:</strong> 1,024 tokens</p>
+          <p><strong>DeepSeek:</strong> Automatic, no published minimum</p>
+        </div>
+
+        <h2>How to Structure Prompts for Maximum Caching</h2>
+
+        <p>The golden rule: <strong>put stable content at the beginning of your prompt, and variable content at the end.</strong></p>
+
+        <h3>Good structure (cacheable)</h3>
+        <p>System prompt → Tool definitions → Document context → User message</p>
+
+        <p>The first three components are identical across requests. Only the user message changes. The provider caches everything up to the point where the content diverges.</p>
+
+        <h3>Bad structure (not cacheable)</h3>
+        <p>User message → System prompt → Tool definitions → Document context</p>
+
+        <p>If the first token of your prompt changes every time (because it starts with the user's unique message), nothing gets cached. The provider can only cache a common prefix.</p>
+
+        <div class="info-box">
+          <div class="info-box-title">Practical Tip</div>
+          <p>If you're using the OpenAI or Anthropic SDK, caching works automatically — you don't need to enable it. Just make sure your system prompt comes before any variable content in the messages array.</p>
+        </div>
+
+        <h2>Provider-Specific Details</h2>
+
+        <h3>Anthropic (Claude)</h3>
+        <p>Anthropic's caching is automatic for prompts over 1,024 tokens. The cache lives for 5 minutes by default — if you send the same prefix again within 5 minutes, it's a cache hit. For Opus models, the minimum is 2,048 tokens.</p>
+        <p>Anthropic is the only provider that charges a premium for cache writes (25% above normal input price). This means caching is only worth it if you send the same prefix more than once. For a prompt sent twice, you break even. For anything sent three or more times, you save money.</p>
+
+        <h3>OpenAI (GPT)</h3>
+        <p>OpenAI's caching is also automatic for prompts over 1,024 tokens. Cache TTL is typically 5-10 minutes. There's no premium for cache writes — you pay the same as normal input on the first request, and 90% less on subsequent requests.</p>
+        <p>OpenAI also offers a <strong>Batch API</strong> with 50% off all tokens for non-real-time workloads (24-hour turnaround). If your use case allows async processing, combine batching with caching for maximum savings.</p>
+
+        <h3>DeepSeek</h3>
+        <p>DeepSeek offers the most aggressive cache pricing in the industry. Cache reads on V4 Flash cost $0.0028/M — that's 98% cheaper than the normal $0.14/M input price. For high-volume agent applications, this makes cached tokens essentially free.</p>
+        <p>DeepSeek's caching applies automatically. There's no minimum length requirement published, and the cache duration is generous for repeated prefixes.</p>
+
+        <h2>When Caching Doesn't Help</h2>
+
+        <p>Caching isn't always the answer. Here's when it provides little or no benefit:</p>
+
+        <ul>
+          <li><strong>Unique prompts every time.</strong> If every request has completely different content, there's no common prefix to cache.</li>
+          <li><strong>Very short prompts.</strong> If your total input is under 1,024 tokens, most providers won't cache it.</li>
+          <li><strong>Infrequent requests.</strong> If you send fewer than 2-3 requests per cache TTL window (5-10 minutes), you won't get cache hits.</li>
+          <li><strong>Constantly changing system prompts.</strong> If you A/B test different system prompts frequently, each variant needs its own cache.</li>
+        </ul>
+
+        <h2>Beyond Provider Caching: Application-Level Strategies</h2>
+
+        <p>Provider-level caching handles repeated prefixes, but you can go further:</p>
+
+        <h3>Response caching</h3>
+        <p>If two users ask the same question, the response will be identical. Cache the response at the application level (in Redis, Memcached, or even a database) and serve it without making an API call.</p>
+
+        <h3>Semantic caching</h3>
+        <p>Use embeddings to find semantically similar queries. If someone asks "How do I sort a list in Python?" and another asks "How to sort array in Python?", the response is the same. Semantic caching matches these even when the exact wording differs.</p>
+
+        <h3>Prompt compression</h3>
+        <p>Reduce the size of your system prompt. Every token you remove from the system prompt saves money on every single request. Use concise instructions, remove redundant examples, and compress verbose tool descriptions.</p>
+
+        <div class="cta-box">
+          <p>Calculate how much you'd save with caching</p>
+          <a href="/">Open Cost Calculator</a>
+        </div>
+
+        <div class="article-divider"></div>
+
+        <h2>The Bottom Line</h2>
+
+        <p>Prompt caching is the single most impactful cost optimization available to AI API users. It requires zero code changes on most providers, and the savings compound with every request. If your application sends the same system prompt more than three times, you're leaving money on the table.</p>
+
+        <p>Start by measuring your current costs. Then structure your prompts with stable content first, variable content last. The savings will follow.</p>
+
+        <div class="article-divider"></div>
+
+        <p style="font-size: 0.82rem; color: var(--brown-soft); line-height: 1.7;">Pricing sourced from official provider documentation (May 2026). Cache TTL, minimum lengths, and pricing may change. Always verify current rates on the provider's pricing page. DeepSeek V4 Pro pricing reflects the 75% promotional discount valid until May 31, 2026.</p>
+
+      </div>
+    </article>
+
+    <footer>
+      <span>© 2026 AI Token Cost Calculator</span>
+      <span>|</span>
+      <a href="/">Calculator</a>
+      <span>|</span>
+      <a href="/blog.html">Blog</a>
+      <span>|</span>
+      <a href="/about.html">About</a>
+      <span>|</span>
+      <a href="/privacy.html">Privacy</a>
+    </footer>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      document.body.classList.add("ready");
+    });
+  </script>
+</body>
+</html>
