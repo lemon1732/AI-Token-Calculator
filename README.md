@@ -20,6 +20,16 @@
 | Google | Gemini 3.1 Pro, 3 Flash, 3 Deep Think, 2.5 Pro/Flash/Flash-Lite |
 | DeepSeek | V4 Flash, V4 Pro |
 
+## Blog
+
+Guides on AI API pricing, model selection, and cost optimization:
+
+- [How to Build a Model Router](https://tokencostcalc.com/blog/model-router-cheap-models.html) — Route simple tasks to cheap models, cutting your bill by 80%
+- [Complete API Pricing Comparison 2026](https://tokencostcalc.com/blog/openai-vs-anthropic-vs-google-pricing-2026.html) — Every model, every price across OpenAI, Anthropic, Google, and DeepSeek
+- [GPT-5.5 vs Claude Opus 4.7 vs Gemini 3.1 Pro](https://tokencostcalc.com/blog/gpt55-vs-opus47-vs-gemini31.html) — Frontier model comparison with benchmarks and cost analysis
+- [How to Save 90% on AI API Costs with Prompt Caching](https://tokencostcalc.com/blog/prompt-caching-guide.html) — How caching works and how to structure prompts for maximum savings
+- [What Are Tokens? A Guide to AI API Pricing](https://tokencostcalc.com/blog/token-pricing-guide.html) — Token fundamentals and cost estimation
+
 ## Development
 
 This is a static site with no build step. Just open `index.html` in a browser or use any local server:
