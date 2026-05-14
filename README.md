@@ -2,6 +2,8 @@
 
 > Free AI API token cost calculator. Compare pricing across OpenAI, Anthropic, Google, and DeepSeek models.
 
+**[tokencostcalc.com](https://tokencostcalc.com/)**
+
 ## Features
 
 - **Real-time cost calculation** for input, output, cache write, and cache read tokens
